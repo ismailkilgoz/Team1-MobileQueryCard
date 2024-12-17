@@ -59,6 +59,7 @@ public class OptionsMet {
         driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textMatches(\""
                         + elementText + "\").instance(0))"));
+
     }
 
     // Ekrandaki bir butona tıklama metodu
@@ -66,6 +67,7 @@ public class OptionsMet {
         AndroidDriver driver = (AndroidDriver) getAppiumDriver();
         WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiSelector().description(\"" + description + "\")"));
+
         button.click();
     }
 

@@ -27,6 +27,11 @@ public class SignUpPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
     private WebElement passwordBox;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
+    private WebElement signUpButtonforUnsuccesMessage;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Error The email has already been taken.\")")
+    private WebElement errorMessage;
 
 
 
@@ -68,6 +73,7 @@ public class SignUpPage {
             WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
                     "new UiSelector().description(\"" + description + "\")"));
 
+            //  new UiSelector().description("Error The email has already been taken.")
 
      return button;
     }
