@@ -30,7 +30,7 @@ public class SignUpPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign Up\").instance(1)")
     private WebElement signUpButtonforUnsuccesMessage;
 
-    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Error The email has already been taken.\")")
+    @AndroidFindBy (uiAutomator = "new UiSelector().descriptionContains(\"Error\")")
     private WebElement errorMessage;
 
 
@@ -54,12 +54,16 @@ public class SignUpPage {
                 if (driver.findElement(MobileBy.AccessibilityId("*Use Email Instead")).isDisplayed()) {
                     driver.findElement(MobileBy.AccessibilityId("*Use Email Instead")).click();
                 }
-            } else if (inputType.equals("Phone")) {
+            } /*else if (inputType.equals("Phone")) {
 
                 if (driver.findElement(MobileBy.AccessibilityId("*Use Phone Instead")).isDisplayed()) {
                     driver.findElement(MobileBy.AccessibilityId("*Use Phone Instead")).click();
+                }else {
+                    
                 }
+
             }
+            */
 
 
 

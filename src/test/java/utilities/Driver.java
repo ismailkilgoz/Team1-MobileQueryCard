@@ -33,6 +33,7 @@ public class Driver {
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");
                     options.setNoReset(false);
+                    options.setCapability("appium:disableIdLocatorAutocompletion", true);
                     options.setNewCommandTimeout(Duration.ofMinutes(20));
                     try {
                         driver = new AndroidDriver(

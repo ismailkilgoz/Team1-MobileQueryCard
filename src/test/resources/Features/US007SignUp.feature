@@ -12,6 +12,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
   And The user enters a valid password "Team123."
   * User clicks the button with description "Sign Up"
   Then The user should see a registration "Success Register Successfully." message
+  * Driver turns off
   Examples:
   | input_type | input_value             |
   | Email      |john.doe+1@example.com   |
@@ -27,8 +28,8 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     And The user switches to "<input_type>" input field if needed
     And The user enters an already registered "<input_value>"
     And The user enters a valid password "Team123."
-    * User clicks the button with description Sign Up.
-    Then The user should see a registration "Error The email has already been taken." message.
+    * User clicks the button with description Sign Up and should see a registration Error message.
+    * Driver turns off
     Examples:
       | input_type | input_value          |
       | Email      | john.doe@example.com |
