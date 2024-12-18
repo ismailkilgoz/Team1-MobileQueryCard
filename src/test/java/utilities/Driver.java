@@ -28,11 +28,12 @@ public class Driver {
                 case "Android":
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
-                    options.setApp("C:/Users/MONSTER/Downloads/querycart2006.apk/");
+                   // options.setApp("C:/Users/MONSTER/Downloads/querycart2006.apk/");
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");
                     options.setNoReset(false);
+                    options.setCapability("appium:disableIdLocatorAutocompletion", true);
                     options.setNewCommandTimeout(Duration.ofMinutes(20));
                     try {
                         driver = new AndroidDriver(

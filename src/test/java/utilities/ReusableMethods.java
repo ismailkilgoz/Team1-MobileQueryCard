@@ -20,6 +20,8 @@ import static utilities.Driver.getAppiumDriver;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,6 +115,19 @@ public class ReusableMethods {
             e.printStackTrace();
         }
     }
+
+    public static WebElement waitForElement(AndroidDriver driver, WebElement element, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        try {
+            // Elementin görünür olmasını bekle
+            WebElement visibleElement = wait.until(ExpectedConditions.visibilityOf(element));
+            return visibleElement; // Webelement döner
+        } catch (Exception e) {
+            System.out.println("Element not visible within " + timeoutInSeconds + " seconds.");
+            throw e;
+        }
+    }
+
 
 
 
