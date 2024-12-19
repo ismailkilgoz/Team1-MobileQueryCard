@@ -1,10 +1,14 @@
 package stepdefinitions;
 
 import Page.SignUpPage;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,6 +43,7 @@ public class SignUpStepdefinition {
     public void the_user_enters_a_valid_password_(String validPassword) {
         signUpPage.getPasswordBox().click();
         signUpPage.getPasswordBox().sendKeys(validPassword);
+        ReusableMethods.wait(2);
     }
 
 
@@ -58,12 +63,21 @@ public class SignUpStepdefinition {
        signUpPage.getPhoneOrEmailBox().click();
        signUpPage.getPhoneOrEmailBox().sendKeys(existedMailOrPhone);
     }
-    @Given("User clicks the button with description Sign Up and should see a registration Error message.")
-    public void user_clicks_the_button_with_description() {
-        ReusableMethods.waitForElement(driver,signUpPage.getSignUpButtonforUnsuccesMessage(),3);
-        signUpPage.getSignUpButtonforUnsuccesMessage().click();
-        WebElement errorMes= ReusableMethods.waitForElement(driver,signUpPage.getErrorMessage(),15);
-        Assert.assertTrue(errorMes.isDisplayed());
+    @Given("User clicks the button with description Sign Up and should see a registration {string} message by the {string}.")
+    public void user_clicks_the_button_with_description( String input_type,String expected_message) {
+        ReusableMethods.waitForElement(driver,signUpPage.getSignUpButtonforUnsuccesMessage(),8);
+       signUpPage.getSignUpButtonforUnsuccesMessage().click();
+       signUpPage.verifyGetErrorMessage(input_type,expected_message);
     }
+    // TC03
+
+
+    @Given("User leaves {string} empty by {string} , clicks the button with description Sign Up and should see a validation message {string}.")
+    public void user_leaves_empty( String field, String input_type,String message ) {
+        signUpPage.verifyRequiredFieldIsNotEmpty(input_type ,field,message);
+    }
+
+
+
 
 }
