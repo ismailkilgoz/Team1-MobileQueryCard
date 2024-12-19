@@ -22,6 +22,6 @@ Feature:  [US_025]  Return
       #*
       # İade nedeni ,not ve attachment eklenebilmeli
       #*
-      # Request Return butonu gorunur ve aktif olmalı
+      # Request Return butonu gorunur ve aktif olmalı.
       #*
       # Return Orders sayfasında iade islemi baslatıldıgı goruntulenmeli
