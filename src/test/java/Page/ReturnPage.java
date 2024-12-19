@@ -133,13 +133,22 @@ public class ReturnPage {
         assertTrue(saveAndPayButton.isDisplayed());
         saveAndPayButton.click();
 
+        wait.until(ExpectedConditions.visibilityOf(stripeBox));
         assertTrue(stripeBox.isDisplayed());
         stripeBox.click();
 
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(1);
         assertTrue(confirmOrderButton.isDisplayed());
         confirmOrderButton.click();
+        ReusableMethods.wait(3);
 
+        if (saveAndPayButton.isDisplayed()){
+            saveAndPayButton.click();
+            stripeBox.click();
+            confirmOrderButton.click();
+        }
+
+        wait.until(ExpectedConditions.visibilityOf(cardNumberTextBox));
         assertTrue(cardNumberTextBox.isDisplayed());
         cardNumberTextBox.click();
         cardNumberTextBox.sendKeys("4242424242424242");
