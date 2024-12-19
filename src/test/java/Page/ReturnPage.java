@@ -66,8 +66,23 @@ public class ReturnPage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Stripe\"]")
     private WebElement stripeBox;
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Cash On Delivery\"]")
+    private WebElement cashOnDeliveryBox;
+
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Confirm Order\"]")
     private WebElement confirmOrderButton;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(0)")
+    private WebElement cardNumberTextBox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(1)")
+    private WebElement mmYYTextBox;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").instance(2)")
+    private WebElement cvcTextBox;
+
+    @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"confirmBtn\"]")
+    private WebElement confirmButton;
 
 
     public void emailTextBoxClickAndSendKeys(String email) {
@@ -98,15 +113,10 @@ public class ReturnPage {
 
         successAlertBox.isDisplayed();
 
-        /*
-        WebElement alertBox =  getAppiumDriver().findElement(By.xpath("//android.view.View[@content-desc=\"Success\n" +
-                "Product added to cart\"]"));
-        String alertText = alertBox.getText();
-        System.out.println(alertText);
-                        -- ? toast message text alamadim ? --
-        String alertText = successAlertBox.getText();
-        System.out.println("alertText = " + alertText);
-         */
+        String alertText = successAlertBox.getAttribute("content-desc");
+
+        assertTrue(alertText.contains("Success\n" +
+                "Product added to cart"));
 
         assertTrue(shoppingCartButton.isDisplayed());
         shoppingCartButton.click();
@@ -118,6 +128,7 @@ public class ReturnPage {
         shippingAddressBox.click();
 
         OptionsMet.swipe(700,1550,700,750);
+        ReusableMethods.wait(1);
 
         assertTrue(saveAndPayButton.isDisplayed());
         saveAndPayButton.click();
@@ -125,10 +136,24 @@ public class ReturnPage {
         assertTrue(stripeBox.isDisplayed());
         stripeBox.click();
 
+        ReusableMethods.wait(5);
         assertTrue(confirmOrderButton.isDisplayed());
         confirmOrderButton.click();
 
+        assertTrue(cardNumberTextBox.isDisplayed());
+        cardNumberTextBox.click();
+        cardNumberTextBox.sendKeys("4242424242424242");
 
+        assertTrue(mmYYTextBox.isDisplayed());
+        mmYYTextBox.click();
+        mmYYTextBox.sendKeys("1228");
+
+        assertTrue(cvcTextBox.isDisplayed());
+        cvcTextBox.click();
+        cvcTextBox.sendKeys("123");
+
+        assertTrue(confirmButton.isDisplayed());
+        confirmButton.click();
 
     }
 }
