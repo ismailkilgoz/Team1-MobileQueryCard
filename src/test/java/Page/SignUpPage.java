@@ -74,6 +74,8 @@ public class SignUpPage extends BasePage{
 
 
 
+
+
     public WebElement ClickButtonByClassNameIndex(int index){
 
         WebElement button= driver.findElement(MobileBy.AndroidUIAutomator
@@ -83,7 +85,7 @@ public class SignUpPage extends BasePage{
     }
 
 
-    public void SelectSingUpWithEmailOrPhoneNumber(String inputType){
+    public void SelectSingUpWithEmail(String inputType){
 
             if (inputType.equals("Email")) {
                 if (driver.findElement(MobileBy.AccessibilityId("*Use Email Instead")).isDisplayed()) {
