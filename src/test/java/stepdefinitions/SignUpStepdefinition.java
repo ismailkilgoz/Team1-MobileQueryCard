@@ -31,7 +31,7 @@ public class SignUpStepdefinition {
     }
     @Given("The user switches to {string} input field if needed")
     public void the_user_switches_to_input_field_if_needed(String inputType) {
-        signUpPage.SelectSingUpWithEmailOrPhoneNumber(inputType);
+        signUpPage.SelectSingUpWithEmail(inputType);
     }
     @Given("The user enters {string} in the input field")
     public void the_user_enters_in_the_input_field(String inputValue) {

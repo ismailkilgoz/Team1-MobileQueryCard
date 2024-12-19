@@ -18,5 +18,10 @@ public class HomePage {
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Home\")")
-    private WebElement HomePage;
+    public WebElement HomePage;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    public WebElement Medium;
+
+
 }
