@@ -1,18 +1,31 @@
 package stepdefinitions;
 
+import Page.CategoryMenPage;
 import io.cucumber.java.en.Given;
+import org.junit.Assert;
 import utilities.OptionsMet;
+import utilities.ReusableMethods;
 
 public class US_013_US_022 extends OptionsMet {
 
-
+    CategoryMenPage categoryMenPage=new CategoryMenPage();
     @Given("User clicks arrow on Men Page")
     public void user_clicks_arrow_on_men_page() {
+        categoryMenPage.menArrow.click();
 
     }
     @Given("User verifies Men Clothing, Men Shoes, Men Accessories are enable")
     public void user_verifies_men_clothing_men_shoes_men_accessories_are_enable() {
 
+        String menClothingExpected="Men Clothing";
+        VerifyElementText(menClothingExpected);
+
+
+        String menShoesExpected="Men Shoes";
+        VerifyElementText(menShoesExpected);
+
+        String menAccessoriesExpected="Men Accessories";
+        VerifyElementText(menAccessoriesExpected);
     }
 
     @Given("User clicks first product")
