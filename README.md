@@ -19,7 +19,7 @@
 <p align="center">
 <b>
    <a href="https://appium.io/docs/en/latest/intro/">Get Started</a> |
-   <a href="https://appium.io">Documentation</a> |
+   <a href="https://appium.io">Documentation</a>
 </b></p>
 
 ***
