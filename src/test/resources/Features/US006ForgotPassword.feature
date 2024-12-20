@@ -15,7 +15,7 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
   * User clicks the button with description "Get OTP"
   * Verifies succes Message "The User verify is successfully." in dashboard.
   * User clicks NewPasswordTextBox and confirmPasswordTextBox "Wise.123"
-  *  User clicks the button with description "Submit"
+  * User clicks the button with description "Submit"
   * Verifies confirmation message "Your password reset Successfully." in dashboard.
   * User clicks the button with description "Profile"
   * The user verifies that the "John" is displayed on the profile page.
@@ -26,7 +26,7 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
 
   Scenario:[US_006] TC02 Password reset with a valid phone number
 
-    *  User clicks the button with description "Profile"
+    * User clicks the button with description "Profile"
     * User clicks the button with description "Sign In"
     * User clicks the button with description "Forgot Password"
     * Verifies username "Forgot Password" in dashboard
