@@ -36,7 +36,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
       | Email      | john.doe@example.com |The email has already been taken.|
       | Phone      | 1234567890           |The phone has already been taken.|
 
-  @seren
+
   #Eksik Zorunlu Alanlar
   Scenario Outline: Missing required fields during registration
     * User clicks the button with description "Profile"

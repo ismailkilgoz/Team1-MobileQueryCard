@@ -7,6 +7,7 @@ import io.appium.java_client.touch.ActionOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
@@ -160,7 +161,25 @@ public class ReusableMethods {
         driver.perform(Collections.singletonList(tap));
     }
 
+    public static void VerifyElementTextByGetAttribute(String expectedText, WebElement webelement){
 
+        String actualText= webelement.getAttribute("content-desc");
+        System.out.println("ActualText : " + actualText);
+        Assert.assertTrue("ActualText does not match! Expected: " + expectedText + ", but Found: " + actualText,
+                actualText.contains(expectedText));
+
+
+    }
+
+
+
+    public static void SignInWithEmail(int row){
+
+
+
+
+
+    }
 
 
 }

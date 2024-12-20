@@ -5,11 +5,14 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
@@ -21,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
 
 public class OptionsMet {
+
+    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 //
     public static void swipe(int x, int y, int endX, int endY) throws InvalidMidiDataException {
         /******  PointerInput ve Sequence Kullanımı: PointerInput ile parmak hareketlerini
@@ -113,6 +118,8 @@ public class OptionsMet {
         element.click();
 
     }
+
+
 
 }
 
