@@ -26,11 +26,26 @@ public class MyAccountPage {
 
     }
 
-    @AndroidFindBy(uiAutomator= "new UiSelector().description(\"Profile\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Profile\")")
     private WebElement profileIcon;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"umit.user@querycart.com\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Osske\")")
     private WebElement userPageInfo;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"My Account\")")
+    private WebElement myAccountHeader;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Total Orders\")")
+    private WebElement totalOrdersHeader;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Total Completed\")")
+    private WebElement totalCompletedHeader;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Total Returnd\")")
+    private WebElement totalReturnedHeader;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Wallet Balance\")")
+    private WebElement walletBalance;
 
 
 }
