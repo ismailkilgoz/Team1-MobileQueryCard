@@ -118,6 +118,59 @@ public class QueryCardPage {
 
     }
 
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Men\")")
+    private WebElement categoryPageMenButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Sign In\").instance(0)")
+    private WebElement signInPageSignInText;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(0)\n")
+    private WebElement signInPageBackButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Sing In To See Your Info\")\n")
+    private WebElement signInToSeeYourInfoText;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(1)")
+    private WebElement searchBoxButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.EditText\")\n")
+    private WebElement searchPageSearchBoxLink;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.view.View\").instance(9)")
+    private WebElement searchPageResultFirstElement;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement menCategoryFilterButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Filter & Sorting\")\n")
+    private WebElement filterPageFilterSortingText;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Women\")")
+    private WebElement categoryPageWomenButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Juniors\")")
+    private WebElement categoryPageJuniorsButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement womenCategoryFilterButton;
+
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement juniorCategoryFilterButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
