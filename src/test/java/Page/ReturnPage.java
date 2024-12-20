@@ -3,7 +3,9 @@ package Page;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +24,7 @@ public class ReturnPage {
     public ReturnPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
     }
+    Actions actions = new Actions(getAppiumDriver());
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"*Use Email Instead\"]")
     private WebElement useEmailInstead;
@@ -32,13 +35,13 @@ public class ReturnPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Home\")")
     private WebElement homeButton;
 
-    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Adidas Ultraboost 21 Sneakers\n" +
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Quilted Puffer Jacket\n" +
             "0 (0  Reviews)\n" +
-            "$180.00\"]")
-    private WebElement adidasUltraboost;
+            "$120.00\"]")
+    private WebElement quiltedPufferJacket;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"White\")")
-    private WebElement adidasUltraboostWhitecolor;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    private WebElement mediumSizeButton;
 
     @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Add To Cart\"]")
     private WebElement addToCartButton;
@@ -84,6 +87,15 @@ public class ReturnPage {
     @AndroidFindBy(xpath = "//android.widget.Button[@resource-id=\"confirmBtn\"]")
     private WebElement confirmButton;
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Go to order details\"]")
+    private WebElement goToOrderDetailsButton;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Order History\"]")
+    private WebElement orderHistoryTitle;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Cancel Order\"]")
+    private WebElement cancelOrderButton;
+//android.widget.ImageView[@elementId="00000000-0000-00b4-0000-02db00000003]
 
     public void emailTextBoxClickAndSendKeys(String email) {
         assertTrue(useEmailInstead.isDisplayed());
@@ -93,18 +105,20 @@ public class ReturnPage {
         emailTextBox.sendKeys(email);
     }
 
-    public void adidasProductFromHomePage() throws InvalidMidiDataException {
+    public void pufferJacketProductFromHomePage() throws InvalidMidiDataException {
         homeButton.click();
         //ReusableMethods.ekranKaydirmaMethodu(700,1600,1000,700,500);
         OptionsMet.swipe(700,1600,700,500);
+        OptionsMet.swipe(700,1550,700,750);
         ReusableMethods.wait(1);
-        assertTrue(adidasUltraboost.isDisplayed());
-        adidasUltraboost.click();
+        assertTrue(quiltedPufferJacket.isDisplayed());
+        quiltedPufferJacket.click();
         //ReusableMethods.ekranKaydirmaMethodu(700,1550,1000,700,750);
         OptionsMet.swipe(700,1550,700,750);
         ReusableMethods.wait(1);
-        assertTrue(adidasUltraboostWhitecolor.isDisplayed());
-        adidasUltraboostWhitecolor.click();
+        assertTrue(mediumSizeButton.isDisplayed());
+        mediumSizeButton.click();
+        ReusableMethods.wait(1);
         assertTrue(addToCartButton.isDisplayed());
         addToCartButton.click();
 
@@ -140,14 +154,27 @@ public class ReturnPage {
         ReusableMethods.wait(1);
         assertTrue(confirmOrderButton.isDisplayed());
         confirmOrderButton.click();
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(2);
 
-        if (saveAndPayButton.isDisplayed()){
-            saveAndPayButton.click();
-            stripeBox.click();
-            confirmOrderButton.click();
+        int attempt = 0;
+        int maxAttempts = 10; // Maksimum 10 deneme
+
+        while (attempt < maxAttempts) {
+            attempt++;
+            try {
+                if (saveAndPayButton.isDisplayed()) {
+                    saveAndPayButton.click();
+                    wait.until(ExpectedConditions.visibilityOf(stripeBox));
+                    stripeBox.click();
+                    ReusableMethods.wait(1);
+                    confirmOrderButton.click();
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                break;
+            }
         }
-
         wait.until(ExpectedConditions.visibilityOf(cardNumberTextBox));
         assertTrue(cardNumberTextBox.isDisplayed());
         cardNumberTextBox.click();
@@ -160,9 +187,30 @@ public class ReturnPage {
         assertTrue(cvcTextBox.isDisplayed());
         cvcTextBox.click();
         cvcTextBox.sendKeys("123");
+        ReusableMethods.wait(2);
+
+        //actions.sendKeys(Keys.TAB).perform();
+        actions.sendKeys("35000").perform();
 
         assertTrue(confirmButton.isDisplayed());
         confirmButton.click();
+    }
 
+    public void goToOrderPageFromAfterPayment(){
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(goToOrderDetailsButton));
+        assertTrue(goToOrderDetailsButton.isDisplayed());
+        goToOrderDetailsButton.click();
+
+        assertTrue(orderHistoryTitle.isDisplayed());
+        String title = orderHistoryTitle.getAttribute("content-desc");
+
+        assertTrue(title.contains("Order History"));
+    }
+
+    public void cancelOrderIsEnabled(){
+        assertTrue(cancelOrderButton.isEnabled());
+        String exceptedText = cancelOrderButton.getAttribute("content-desc");
+        assertTrue(exceptedText.contains("Cancel Order"));
     }
 }
