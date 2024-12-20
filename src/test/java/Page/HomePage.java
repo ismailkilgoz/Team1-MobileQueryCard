@@ -23,5 +23,8 @@ public class HomePage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
     public WebElement Medium;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(9)")
+    public WebElement ArtiIcon;
+
 
 }

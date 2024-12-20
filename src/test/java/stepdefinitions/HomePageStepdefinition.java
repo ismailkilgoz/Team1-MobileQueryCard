@@ -34,7 +34,7 @@ public class HomePageStepdefinition {
 
     @Given("Waiting")
     public void waiting(){
-        ReusableMethods.wait(10);
+        ReusableMethods.wait(2);
     }
     @Given("User swipes to screen coordinates {int}, {int}, {int}, {int}")
     public void user_swipes_to_screen_coordinates(Integer int1, Integer int2, Integer int3, Integer int4) throws InvalidMidiDataException {
@@ -52,5 +52,10 @@ public class HomePageStepdefinition {
     public void user_clicks_the_button_with_name_of_description(String string) {
         ReusableMethods.wait(6);
         clickButtonByDescription(string);
+    }
+
+    @Given("User increases the product")
+    public void user_increases_the_product() {
+        homePage.ArtiIcon.click();
     }
 }
