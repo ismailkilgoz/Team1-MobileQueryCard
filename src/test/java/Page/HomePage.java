@@ -35,10 +35,7 @@ public class HomePage {
 
     @AndroidFindBy(uiAutomator = "//android.view.View[@content-desc=\"Clarks\"]")
     public WebElement Clarks;
-}
 
-        PageFactory.initElements(new AppiumFieldDecorator(Driver.getAppiumDriver()), this);
-    }
 
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
