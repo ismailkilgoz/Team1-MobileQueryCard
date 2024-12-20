@@ -2,7 +2,7 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
 
   Background: User opens the app
     * User makes driver adjustments
-  @seren
+
   Scenario:[US_006] TC01 Password reset with a valid email
 
   * User clicks the button with description "Profile"
