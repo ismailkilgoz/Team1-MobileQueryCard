@@ -172,4 +172,14 @@ public class ReusableMethods {
     }
 
 
+
+    public static void SignInWithEmail(int row){
+
+
+
+
+
+    }
+
+
 }
