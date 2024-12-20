@@ -1,11 +1,15 @@
 Feature: [US_24] As a user, I would like to be able to register on the site to take advantage of its functions
 
   Background: User opens the app
-    Given The user is signed in
-    And The user has added items to the cart
+
 
 #basarili odeme
+  @seren
   Scenario: Successful payment with Stripe
+    Given The user is signed in
+
+
+    Scenario:
     Given the user navigates to the Payment Information page
     When the user selects "Stripe" as the payment method
     And the user fills in the card information
