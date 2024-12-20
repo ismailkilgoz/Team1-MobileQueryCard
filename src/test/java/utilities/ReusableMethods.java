@@ -7,6 +7,7 @@ import io.appium.java_client.touch.ActionOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
@@ -29,12 +30,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.Date;
 
 public class ReusableMethods {
    private static DesiredCapabilities desiredCapabilities=new DesiredCapabilities();
 
-
+    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
 
     public static void apkYukle(){
@@ -128,7 +130,46 @@ public class ReusableMethods {
         }
     }
 
+    public static void tapElement(WebElement element) {
+        // W3C Pointer Input kullanarak bir tıklama eylemi oluştur
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence tap = new Sequence(finger, 1);
 
+        // Elementin orta koordinatlarını al
+        int centerX = element.getRect().getX() + element.getRect().getWidth() / 2;
+        int centerY = element.getRect().getY() + element.getRect().getHeight() / 2;
+
+        // Tap eylemini tanımla
+        tap.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), centerX, centerY));
+        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        // Driver'a eylemi uygula
+        driver.perform(Collections.singletonList(tap));
+    }
+
+    public static void tapAtCoordinates(int x, int y) {
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence tap = new Sequence(finger, 1);
+
+        // Koordinatlara tap işlemini tanımla
+        tap.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), x, y));
+        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        // Driver'a eylemi uygula
+        driver.perform(Collections.singletonList(tap));
+    }
+
+    public static void VerifyElementTextByGetAttribute(String expectedText, WebElement webelement){
+
+        String actualText= webelement.getAttribute("content-desc");
+        System.out.println("ActualText : " + actualText);
+        Assert.assertTrue("ActualText does not match! Expected: " + expectedText + ", but Found: " + actualText,
+                actualText.contains(expectedText));
+
+
+    }
 
 
 }
