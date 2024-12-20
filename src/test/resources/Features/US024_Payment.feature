@@ -1,12 +1,11 @@
 Feature: [US_24] As a user, I would like to be able to register on the site to take advantage of its functions
 
   Background: User opens the app
-
+    Given The user is signed in as cusmoter seren
 
 #basarili odeme
   @seren
-  Scenario: Successful payment with Stripe
-    Given The user is signed in
+
 
 
     Scenario:
