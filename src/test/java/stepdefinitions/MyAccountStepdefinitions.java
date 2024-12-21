@@ -80,4 +80,22 @@ public class MyAccountStepdefinitions extends OptionsMet {
     }
 
 
+    @Given("A user displays the header of {string}.")
+    public void a_user_displays_the_header_of(String orderHistory) {
+
+        ReusableMethods.wait(4);
+        account.getOrderHistoryTitle().click();
+        ReusableMethods.wait(2);
+
+    }
+    @Given("A user clicks on the header of {string} and verifies that order details are displayed.")
+    public void a_user_clicks_on_the_header_of_and_verifies_that_order_details_are_displayed(String orderHistoryPage) {
+
+        ReusableMethods.wait(3);
+        account.getOrderHistoryPage().isDisplayed();
+
+    }
+
+
+
 }
