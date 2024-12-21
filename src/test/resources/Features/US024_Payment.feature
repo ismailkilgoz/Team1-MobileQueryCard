@@ -4,17 +4,50 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     Given The user is signed in as cusmoter seren
 
 #basarili odeme
-  @seren
 
-
-
+    @seren
     Scenario:
-    Given the user navigates to the Payment Information page
-    When the user selects "Stripe" as the payment method
-    And the user fills in the card information
-    And the user clicks on the "Confirm Order" button
-    Then the order completion message should be displayed
-    And the order details and invoice should be viewable
+    * User clicks the button with description "Home"
+    * User swipes to screen coordinates 840, 941, 68, 941
+    * User swipes to screen coordinates 840, 941, 68, 941
+    * User swipes to screen coordinates 840, 941, 68, 941
+    * User clicks the button with description "Men Accessories"
+    * The user verifies that the "Men Accessories" is displayed.
+    * User swipes to screen coordinates 539, 1886, 548, 530
+    * User clicks tap coordinates 251, 968
+    * User clicks the button with description "Brown"
+    * User swipes to screen coordinates 493, 1964, 498, 548
+    * User clicks the button with description "Add To Cart"
+    * User clicks cart Icon.
+    * User clicks the button with description "Proceed to Checkout"
+    * The user verifies that text contains "Men's Analog Watch".
+    * The user verifies that the "Product added to cart" is displayed.
+    * User clicks tap coordinates 349, 739
+    * The user verifies that text contains "seren".
+    * User swipes to screen coordinates 502, 2018, 502, 709
+    * User clicks the button with description "Save & Pay"
+    * The user verifies that the "Select Payment Method" is displayed.
+    * User clicks the button with description "Stripe"
+    * User clicks the button with description "Confirm Order"
+    * The user clicks card Number Box.
+    * The user enters valid card information into the card number box.
+    * The user clicks the confirm button to approve the payment.
+    * The user verifies that the "Your payment has been confirmed" is displayed.
+    * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed.
+    * User clicks the button with description "Go to order details"
+    * The user verifies that text contains "Paid".
+    * User clicks tap coordinates 936, 495
+    * The user verifies that the "Order Confirmed" is displayed.
+    * User swipes to screen coordinates 509, 2092, 495, 587
+    * The user verifies that the sum of the subtotal and tax matches the total amount.
+    * The user verifies that text contains "Men's Analog Watch".
+    * User clicks the button with description "Download Receipt"
+    * The user verifies that the "Select Payment Method" is displayed.
+    * The user verifies the total price 121.38 on the invoice.
+    * The user verifies that the name of the purchased product on the invoice contains 'Men's Analog Watch'.
+    * The user verifies that the order date and time is today's date.
+    *  User clicks the button with description "Go to shopping"
+    * Driver turns off
 
 # ödeme methodu
   Scenario: Payment method not selected

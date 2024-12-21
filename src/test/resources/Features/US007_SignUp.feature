@@ -45,8 +45,8 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     * Driver turns off
     Examples:
       |input_type|field   |message               |
-    # |Email     |Name    |This field is required|
-    # |Email     |Email   |Email is required     |
+      |Email     |Name    |This field is required|
+      |Email     |Email   |Email is required     |
       |Email     |Password|Passord is required   |
       |Phone     |Name    |This field is required|
       |Phone     |Phone   |This field is required|
