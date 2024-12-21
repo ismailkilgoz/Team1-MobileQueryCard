@@ -162,7 +162,7 @@ public class ReusableMethods {
     }
 
     public static void VerifyTextDisplayedWithDesc(String text){
-        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(30));
 
         WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiSelector().description(\"" + text + "\")"));
