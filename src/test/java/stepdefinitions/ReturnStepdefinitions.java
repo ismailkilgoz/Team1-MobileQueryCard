@@ -4,6 +4,7 @@ import Page.ReturnPage;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -56,27 +57,32 @@ public class ReturnStepdefinitions {
 
     @Given("Switching from Query Cart application to Google Chrome")
     public void switching_from_query_cart_application_to_google_chrome() {
+        ReusableMethods.wait(3);
 
+        Driver.startActivity("com.android.chrome","com.google.android.apps.chrome.Main",false);
 
+        ReusableMethods.wait(2);
     }
     @Given("Go to the Query Cart url and log in with admin information")
     public void go_to_the_query_cart_url_and_log_in_with_admin_information() {
-
-
+        returnPage.googleSearchToQueryCart();
+        ReusableMethods.wait(3);
+        returnPage.signInFromUrl();
     }
     @Given("Go to dashboard from profile icon")
     public void go_to_dashboard_from_profile_icon() {
-
+        returnPage.goToDashboard();
 
     }
     @Given("Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.")
     public void go_to_the_online_orders_page_and_after_the_user_s_order_is_verified_it_is_confirmed_and_delivered() {
-
+        returnPage.confirmOrder();
 
     }
     @Given("Returns to the Query Cart app as the user")
     public void returns_to_the_query_cart_app_as_the_user() {
-
+        Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity",false);
+        System.out.println("Uygulamaya geri dönüldü.");
 
     }
 
