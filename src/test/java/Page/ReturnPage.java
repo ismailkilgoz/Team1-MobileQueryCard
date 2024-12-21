@@ -1,8 +1,10 @@
 package Page;
 
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,6 +26,7 @@ public class ReturnPage {
     public ReturnPage() {
         PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()), this);
     }
+    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
     Actions actions = new Actions(getAppiumDriver());
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"*Use Email Instead\"]")
@@ -95,7 +98,59 @@ public class ReturnPage {
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Cancel Order\"]")
     private WebElement cancelOrderButton;
-//android.widget.ImageView[@elementId="00000000-0000-00b4-0000-02db00000003]
+
+    @AndroidFindBy(id = "com.android.chrome:id/search_box_text")
+    private WebElement googleSearchBox;
+
+    @AndroidFindBy(id = "com.android.chrome:id/line_2")
+    private WebElement googleSearchClick;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Log In\"]")
+    private WebElement queryCardUrlLogin;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"formEmail\")"))
+    private WebElement qcUrlEmailTextBox;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"formPassword\")"))
+    private WebElement qcUrlPasswordTextBox;
+
+    @AndroidFindBy(xpath = ("//android.widget.Button[@text=\"Sign In\"]"))
+    private WebElement qcUrlSigninButton;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().text(\"Profile\")"))
+    private WebElement qcUrlProfileButton;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().text(\"Dashboard\")"))
+    private WebElement qcUrlDashboardButton;
+
+    @AndroidFindBy(xpath = ("//android.view.View[@text=\"Overview\"]"))
+    private WebElement qcUrlDashboardOverviewTitle;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.Button\").instance(0)"))
+    private WebElement qcUrlDashboardMenuForSideBarBtn;
+
+    @AndroidFindBy(xpath = ("//android.view.View[@text=\"Overview\"]"))
+    private WebElement qcUrlSideBarOnlineOrdersBtn;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.Button\").instance(2)"))
+    private WebElement qcUrlSideBarCloseBtn;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().text(\"\uE078\").instance(0)"))
+    private WebElement qcUrlOnlineOrdersMustafaLastOrder;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().text(\"Filter\")"))
+    private WebElement qcUrlOnlineOrdersFilter;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.EditText\").instance(2)"))
+    private WebElement qcUrlOnlineOrdersFilterCostumer;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"vs904-option-124\")"))
+    private WebElement qcUrlOnlineOrdersFilterSelectMustafa;
+
+    @AndroidFindBy(xpath = ("//android.widget.Button[@text=\"Search\"]"))
+    private WebElement qcUrlOnlineOrdersFilterSearchBtn;
+
+
 
     public void emailTextBoxClickAndSendKeys(String email) {
         assertTrue(useEmailInstead.isDisplayed());
@@ -212,5 +267,82 @@ public class ReturnPage {
         assertTrue(cancelOrderButton.isEnabled());
         String exceptedText = cancelOrderButton.getAttribute("content-desc");
         assertTrue(exceptedText.contains("Cancel Order"));
+    }
+
+    public void googleSearchToQueryCart(){
+        //WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(10));
+        //wait.until(ExpectedConditions.visibilityOf(googleSearchBox));
+        ReusableMethods.wait(3);
+        assertTrue(googleSearchBox.isEnabled());
+        googleSearchBox.sendKeys("querycart.com/#/home");
+
+        assertTrue(googleSearchClick.isEnabled());
+        googleSearchClick.click();
+        ReusableMethods.wait(3);
+
+    }
+
+    public void signInFromUrl(){
+        assertTrue(queryCardUrlLogin.isEnabled());
+        queryCardUrlLogin.click();
+        ReusableMethods.wait(2);
+
+        assertTrue(qcUrlEmailTextBox.isEnabled());
+        qcUrlEmailTextBox.click();
+        qcUrlEmailTextBox.sendKeys("mustafa.manager@querycart.com");
+
+        assertTrue(qcUrlPasswordTextBox.isEnabled());
+        qcUrlPasswordTextBox.click();
+        qcUrlPasswordTextBox.sendKeys("Query.151224");
+
+        assertTrue(qcUrlSigninButton.isEnabled());
+        qcUrlSigninButton.click();
+    }
+
+    public void goToDashboard(){
+        assertTrue(qcUrlProfileButton.isEnabled());
+        qcUrlProfileButton.click();
+        ReusableMethods.wait(1);
+
+        assertTrue(qcUrlDashboardButton.isEnabled());
+        qcUrlDashboardButton.click();
+        ReusableMethods.wait(1);
+
+        assertTrue(qcUrlDashboardOverviewTitle.isEnabled());
+        String actualTitle = qcUrlDashboardOverviewTitle.getAttribute("text");
+        assertTrue(actualTitle.contains("Overview"));
+        //Dashboard'a gidildigi dogrulandi.
+
+    }
+
+    public void confirmOrder(){
+        ReusableMethods.wait(2);
+        assertTrue(qcUrlDashboardMenuForSideBarBtn.isEnabled());
+        qcUrlDashboardMenuForSideBarBtn.click();
+        ReusableMethods.wait(1);
+
+        assertTrue(qcUrlSideBarOnlineOrdersBtn.isEnabled());
+        qcUrlSideBarOnlineOrdersBtn.click();
+
+        assertTrue(qcUrlSideBarCloseBtn.isEnabled());
+        qcUrlSideBarCloseBtn.click();
+
+        assertTrue(qcUrlOnlineOrdersFilter.isEnabled());
+        qcUrlOnlineOrdersFilter.click();
+
+        assertTrue(qcUrlOnlineOrdersFilterCostumer.isEnabled());
+        qcUrlOnlineOrdersFilterCostumer.click();
+        qcUrlOnlineOrdersFilterCostumer.sendKeys("mustafa");
+        ReusableMethods.wait(1);
+
+        ReusableMethods.wait(1);
+        assertTrue(qcUrlOnlineOrdersFilterSelectMustafa.isEnabled());
+        qcUrlOnlineOrdersFilterSelectMustafa.click();
+
+        assertTrue(qcUrlOnlineOrdersFilterSearchBtn.isEnabled());
+        qcUrlOnlineOrdersFilterSearchBtn.click();
+        ReusableMethods.wait(1);
+
+        qcUrlOnlineOrdersFilter.click();
     }
 }

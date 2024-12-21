@@ -39,3 +39,11 @@ Feature:  [US_025]  Return
       # Request Return butonu gorunur ve aktif olmalı
       #*
       # Return Orders sayfasında iade islemi baslatıldıgı goruntulenmeli
+
+  Scenario: deneme
+    * Switching from Query Cart application to Google Chrome
+    * Go to the Query Cart url and log in with admin information
+      # Query Cart sayfasina admin bilgileri ile giris yapilir
+    * Go to dashboard from profile icon
+      # Admin islemlerini yapabilmek icin Dashboard'a tiklanir
+    * Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.
