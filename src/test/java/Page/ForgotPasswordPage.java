@@ -8,8 +8,12 @@ import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+import java.time.Duration;
 
 import static utilities.Driver.getAppiumDriver;
 
@@ -34,16 +38,5 @@ public class ForgotPasswordPage extends BasePage{
 
 
 
-
-
-
-
-    public void VerifyUsernameDisplayed(String username){
-
-        WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
-                "new UiSelector().description(\"" + username + "\")"));
-        ReusableMethods.VerifyElementTextByGetAttribute(username,webElement);
-
-    }
 
 }
