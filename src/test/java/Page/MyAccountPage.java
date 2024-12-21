@@ -47,5 +47,11 @@ public class MyAccountPage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Wallet Balance\")")
     private WebElement walletBalance;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Order History\")")
+    private WebElement orderHistoryPage;
+
+    @AndroidFindBy(uiAutomator= "new UiSelector().description(\"Order History\")")
+    private WebElement orderHistoryTitle;
+
 
 }
