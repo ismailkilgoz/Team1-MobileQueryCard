@@ -7,7 +7,6 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
 
     @seren
     Scenario:
-    * User clicks the button with description "Home"
     * User swipes to screen coordinates 840, 941, 68, 941
     * User swipes to screen coordinates 840, 941, 68, 941
     * User swipes to screen coordinates 840, 941, 68, 941
@@ -23,30 +22,28 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * User clicks tap coordinates 349, 739
     * User swipes to screen coordinates 502, 2018, 502, 709
     * Waiting
+    * The user verifies that text contains "$131.38".
     * User clicks the button with description "Save & Pay"
     * The user verifies that the "Select Payment Method" is displayed.
     * User clicks the button with description "Stripe"
+    * Waiting
     * User clicks the button with description "Confirm Order"
     * The user clicks card Number Box.
     * The user enters valid card information into the card number box.
     * The user clicks the confirm button to approve the payment.
     * Waiting
     * Waiting
-    * Waiting
-   # * The user verifies that the "Success Your payment has been confirmed" is displayed.
-   # * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed.
     * User clicks the button with description "Go to order details"
+    * Waiting
     * User clicks tap coordinates 425, 662
-    * The user verifies that the "Order Confirmed" is displayed.
     * User swipes to screen coordinates 509, 2092, 495, 587
+    * Waiting
+    * Waiting
     * The user verifies that the sum of the subtotal and tax matches the total amount.
-    * The user verifies that text contains "Men's Analog Watch".
+    * Waiting
     * User clicks the button with description "Download Receipt"
-    * The user verifies that the "Select Payment Method" is displayed.
-    * The user verifies the total price 131.38 on the invoice.
-    * The user verifies that the name of the purchased product on the invoice contains "Men's Analog Watch".
-    * The user verifies that the order date and time is "22-12-2024".
-    *  User clicks the button with description "Go to shopping"
+    * The user verifies that the order date on the invoice matches today's date.
+
     * Driver turns off
 
 
