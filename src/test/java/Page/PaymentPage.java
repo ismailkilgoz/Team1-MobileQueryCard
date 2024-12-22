@@ -1,14 +1,23 @@
 package Page;
 
 import com.github.javafaker.Faker;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Driver;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static utilities.Driver.getAppiumDriver;
 
@@ -72,6 +81,55 @@ public class PaymentPage extends BasePage {
         int month= faker.number().numberBetween(1,12);
         int year = faker.number().numberBetween(25,30);
         return String.format("%02d%d",month,year);
+    }
+
+
+    public void verifyTotalAmountCalculation(){
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10));
+
+        // subtotal amount
+        WebElement subtotal = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + "$119.00" + "\")"));
+        wait.until(ExpectedConditions.visibilityOf(subtotal));
+
+        String subtotalText= subtotal.getAttribute("content-desc");
+        Double subtotalDouble = Double.parseDouble(subtotalText.replaceAll("[^0-9.]", ""));
+        //tax amount
+        WebElement tax = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + "$2.38" + "\")"));
+        wait.until(ExpectedConditions.visibilityOf(subtotal));
+        String taxText=tax.getAttribute("content-desc");
+        Double taxDouble=Double.parseDouble(taxText.replaceAll("[^0-9.]",""));
+        // shippintCharge amount
+        WebElement shippingCharge= driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + "$10.00" + "\")"));
+        wait.until(ExpectedConditions.visibilityOf(shippingCharge));
+        String shippingChargeText=shippingCharge.getAttribute("content-desc");
+        Double shippingChargeDouble=Double.parseDouble(shippingChargeText.replaceAll("[^0-9.]",""));
+            // total amount
+        WebElement totalAmount= driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"$131.38\")"));
+        String totalAmountText=totalAmount.getAttribute("content-desc");
+        Double totalAmountDouble =Double.parseDouble(totalAmountText.replaceAll("^0-9.",""));
+
+        // subtotal + tax + shippingcharge = totalAmount
+
+
+       Assert.assertTrue( totalAmountDouble==subtotalDouble+taxDouble+shippingChargeDouble);
+
+
+
+
+    }
+
+    public void VerifyInvoiceDate(String invoiceDate){
+
+        LocalDate today = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate parsedInvoiceDate = LocalDate.parse(invoiceDate, formatter);
+        Assert.assertTrue(parsedInvoiceDate.equals(today));
+
     }
 
 
