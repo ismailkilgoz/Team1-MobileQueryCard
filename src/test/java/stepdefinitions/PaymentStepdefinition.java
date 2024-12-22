@@ -47,18 +47,18 @@ public class PaymentStepdefinition {
 
     @Given("The user verifies that the sum of the subtotal and tax matches the total amount.")
     public void the_user_verifies_that_the_sum_of_the_subtotal_and_tax_matches_the_total_amount() {
-
+        paymentPage.verifyTotalAmountCalculation();
     }
     @Given("The user verifies the total price {double} on the invoice.")
     public void the_user_verifies_the_total_price_on_the_invoice(Double double1) {
 
     }
-    @Given("The user verifies that the name of the purchased product on the invoice contains 'Men's Analog Watch'.")
+    @Given("The user verifies that the name of the purchased product on the invoice contains {string}.")
     public void the_user_verifies_that_the_name_of_the_purchased_product_on_the_invoice_contains_men_s_analog_watch() {
 
     }
-    @Given("The user verifies that the order date and time is today's date.")
-    public void the_user_verifies_that_the_order_date_and_time_is_today_s_date() {
-
+    @Given("The user verifies that the order date and time is {string}.")
+    public void the_user_verifies_that_the_order_date_and_time_is_today_s_date(String todaysDate) {
+        paymentPage.VerifyInvoiceDate(todaysDate);
     }
 }

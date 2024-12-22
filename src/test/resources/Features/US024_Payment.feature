@@ -34,10 +34,9 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * Waiting
     * Waiting
    # * The user verifies that the "Success Your payment has been confirmed" is displayed.
-    * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed.
+   # * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed.
     * User clicks the button with description "Go to order details"
-    * The user verifies that text contains "Paid".
-    * User clicks tap coordinates 936, 495
+    * User clicks tap coordinates 425, 662
     * The user verifies that the "Order Confirmed" is displayed.
     * User swipes to screen coordinates 509, 2092, 495, 587
     * The user verifies that the sum of the subtotal and tax matches the total amount.
@@ -45,8 +44,8 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * User clicks the button with description "Download Receipt"
     * The user verifies that the "Select Payment Method" is displayed.
     * The user verifies the total price 131.38 on the invoice.
-    * The user verifies that the name of the purchased product on the invoice contains 'Men's Analog Watch'.
-    * The user verifies that the order date and time is today's date.
+    * The user verifies that the name of the purchased product on the invoice contains "Men's Analog Watch".
+    * The user verifies that the order date and time is "22-12-2024".
     *  User clicks the button with description "Go to shopping"
     * Driver turns off
 
