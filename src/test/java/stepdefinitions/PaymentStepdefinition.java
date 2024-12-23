@@ -2,11 +2,25 @@ package stepdefinitions;
 
 import Page.PaymentPage;
 import com.github.javafaker.Faker;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ExcelDataReader;
+import utilities.OptionsMet;
 import utilities.ReusableMethods;
+
+import javax.management.relation.RelationSupport;
+import java.time.Duration;
+import java.util.NoSuchElementException;
 
 import static utilities.Driver.getAppiumDriver;
 
@@ -54,4 +68,32 @@ public class PaymentStepdefinition {
     public void the_user_verifies_that_the_order_date_and_time_is_today_s_date() {
         paymentPage.VerifyInvoiceDate();
     }
+
+    @Given("The user verifies that the {string} is displayed")
+    public void the_user_verifies_that_the_is_displayed(String string) {
+        OptionsMet.VerifyElementText(string);
+
+    }
+    @Then("a pop-up message {string} should be displayed.")
+    public void an_error_message_should_be_displayed(String str) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+
+        WebElement textelement = wait.until(ExpectedConditions.visibilityOf(paymentPage.getSelectPaymentMethod()));
+            String strText= textelement.getAttribute("content-desc");
+        System.out.println(strText);
+        // Elementin görünüp görünmediğini kontrol et
+            Assert.assertTrue(strText.contains(str));
+
+
+
+       ReusableMethods.wait(2);
+
+    }
+
+    @Given("The user enters invalid card information")
+    public void the_user_enters_invalid_card_information() {
+     paymentPage.fillCreditCardDetailsWithInvalidCard();
+    }
+
 }
