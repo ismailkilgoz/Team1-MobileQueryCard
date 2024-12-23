@@ -144,6 +144,12 @@ public class ReturnPage {
     @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.EditText\").instance(2)"))
     private WebElement qcUrlOnlineOrdersFilterCostumer;
 
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.view.View\").instance(20)"))
+    private WebElement qcUrlOnlineOrdersFilterStatus;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"vs159-option-0\")"))
+    private WebElement qcUrlOnlineOrdersFilterStatusPending;
+
     @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"vs904-option-124\")"))
     private WebElement qcUrlOnlineOrdersFilterSelectMustafa;
 
@@ -263,7 +269,7 @@ public class ReturnPage {
         assertTrue(title.contains("Order History"));
     }
 
-    public void cancelOrderIsEnabled(){
+    public void cancelOrderIsEnabled() throws InvalidMidiDataException {
         assertTrue(cancelOrderButton.isEnabled());
         String exceptedText = cancelOrderButton.getAttribute("content-desc");
         assertTrue(exceptedText.contains("Cancel Order"));
@@ -329,6 +335,13 @@ public class ReturnPage {
 
         assertTrue(qcUrlOnlineOrdersFilter.isEnabled());
         qcUrlOnlineOrdersFilter.click();
+
+        assertTrue(qcUrlOnlineOrdersFilterStatus.isEnabled());
+        qcUrlOnlineOrdersFilterStatus.click();
+        ReusableMethods.wait(1);
+
+        assertTrue(qcUrlOnlineOrdersFilterStatusPending.isEnabled());
+        qcUrlOnlineOrdersFilterStatusPending.click();
 
         assertTrue(qcUrlOnlineOrdersFilterCostumer.isEnabled());
         qcUrlOnlineOrdersFilterCostumer.click();

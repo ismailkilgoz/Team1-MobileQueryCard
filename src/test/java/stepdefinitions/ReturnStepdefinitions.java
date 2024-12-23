@@ -46,6 +46,8 @@ public class ReturnStepdefinitions {
     @Given("User clicks on his last order and examines the details")
     public void user_clicks_on_his_last_order_and_examines_the_details() throws InvalidMidiDataException {
         OptionsMet.touchDown(700,800);
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(700,2240,700,600);
         OptionsMet.swipe(700,2240,700,600);
         ReusableMethods.wait(1);
         returnPage.cancelOrderIsEnabled();
