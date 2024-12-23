@@ -68,7 +68,7 @@ public class ReusableMethods {
         getAppiumDriver().perform(singletonList(sequence));
            }
 
-  //  static AndroidDriver<AndroidElement> driver=Driver.getAppiumDriver();
+
     public static void koordinatTiklamaMethodu(int x,int y) throws InterruptedException {
         TouchAction action=new TouchAction((PerformsTouchActions) getAppiumDriver());
         action.press(PointOption.point(x,y)).release().perform();
@@ -161,15 +161,24 @@ public class ReusableMethods {
         driver.perform(Collections.singletonList(tap));
     }
 
-    public static void VerifyElementTextByGetAttribute(String expectedText, WebElement webelement){
+    public static void VerifyTextDisplayedWithDesc(String text){
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(30));
 
-        String actualText= webelement.getAttribute("content-desc");
+        WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + text + "\")"));
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+
+        String actualText= webElement.getAttribute("content-desc");
         System.out.println("ActualText : " + actualText);
-        Assert.assertTrue("ActualText does not match! Expected: " + expectedText + ", but Found: " + actualText,
-                actualText.contains(expectedText));
+        Assert.assertTrue("ActualText does not match! Expected: " + text + ", but Found: " + actualText,
+                actualText.contains(text));
+
 
 
     }
+
+
+
 
 
 }

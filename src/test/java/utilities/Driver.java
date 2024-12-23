@@ -59,6 +59,25 @@ public class Driver {
 
         return driver;
     }
+    public static void startActivity(String appPackage, String appActivity, boolean noReset) {
+        if (getAppiumDriver() instanceof AndroidDriver) {
+            UiAutomator2Options options = new UiAutomator2Options();
+            options.setAppPackage(appPackage);
+            options.setAppActivity(appActivity);
+            options.setNoReset(noReset); // noReset ayarı
+
+            try {
+                // Mevcut sürücüyle yeni bir aktivite başlatılıyor
+                ((AndroidDriver) getAppiumDriver()).startActivity(
+                        new io.appium.java_client.android.Activity(appPackage, appActivity)
+                );
+            } catch (Exception e) {
+                throw new RuntimeException("Aktivite başlatılamadı: " + e.getMessage());
+            }
+        } else {
+            throw new UnsupportedOperationException("Bu özellik yalnızca Android cihazlar için geçerlidir.");
+        }
+    }
 
     public static void quitAppiumDriver() {
         if (driver != null) {
