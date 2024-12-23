@@ -11,9 +11,13 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "stepdefinitions",
         tags = " @seren" ,
-        dryRun = true
+        dryRun = false
 
 
 )
-public class RunnerSeren {
+public class
+
+
+
+RunnerSeren {
 }
