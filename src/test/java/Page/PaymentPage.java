@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -54,6 +55,20 @@ public class PaymentPage extends BasePage {
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"confirmBtn\")")
     private  WebElement confirmButton;
 
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"card-errors\")")
+    private  WebElement invalidCardMessage;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Error\n" +
+            "Please select payment method.\")")
+    private  WebElement selectPaymentMethod;
+
+    //  new UiSelector().description("Error
+    //Please select payment method.")
+
+    //  new UiSelector().resourceId("card-errors")
+//  invalidCardMessage;
+    //Your card number is invalid.
 
 
     public void fillCreditCardDetails(){
@@ -147,6 +162,29 @@ public class PaymentPage extends BasePage {
             // Bugünün tarihi ile karşılaştır
             Assert.assertEquals(todayDate, invoiceDate);
             System.out.println("Invoice date matches today's date: " + invoiceDate);
+
+
+    }
+
+
+    public void fillCreditCardDetailsWithInvalidCard(){
+
+
+        cardNumberBox.click();
+        cardNumberBox.sendKeys("4000002760000000");
+        String expireDate=generateExpiredDate();
+        mmYYBox.click();
+        mmYYBox.sendKeys(expireDate);
+        System.out.println(expireDate);
+        String cvc=faker.number().digits(3);
+        ReusableMethods.waitForElement(driver,cvcBox,10);
+        cvcBox.click();
+        cvcBox.sendKeys(cvc);
+        System.out.println(cvc);
+        String zip=faker.address().zipCode();
+        ReusableMethods.wait(1);
+        actions.sendKeys(zip).perform();
+        ReusableMethods.wait(1);
 
 
     }

@@ -31,7 +31,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with description {string}")
     public void user_clicks_the_button_with_description(String description) {
-        ReusableMethods.wait(6);
+       ReusableMethods.wait(6);
         clickButtonByDescription(description);
     }
 

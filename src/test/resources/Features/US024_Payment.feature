@@ -2,11 +2,6 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
 
   Background: User opens the app
     Given The user is signed in as cusmoter seren
-
-#basarili odeme
-
-    @seren
-    Scenario:
     * User swipes to screen coordinates 840, 941, 68, 941
     * User swipes to screen coordinates 840, 941, 68, 941
     * User swipes to screen coordinates 840, 941, 68, 941
@@ -25,6 +20,13 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * The user verifies that text contains "$131.38".
     * User clicks the button with description "Save & Pay"
     * The user verifies that the "Select Payment Method" is displayed.
+
+
+#basarili odeme
+
+
+    Scenario:
+
     * User clicks the button with description "Stripe"
     * Waiting
     * User clicks the button with description "Confirm Order"
@@ -33,6 +35,9 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * The user clicks the confirm button to approve the payment.
     * Waiting
     * Waiting
+    * Waiting
+    Then a pop-up message "Thank you for your order! Your order is confirmed." should be displayed.
+  #  * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed
     * User clicks the button with description "Go to order details"
     * Waiting
     * User clicks tap coordinates 425, 662
@@ -47,26 +52,31 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * Driver turns off
 
 
-
+@seren
 # ödeme methodu
   Scenario: Payment method not selected
-    Given the user navigates to the Payment Information page
-    When the user does not select a payment method
-    And the user clicks on the "Confirm Order" button
-    Then an error message "Please select a payment method" should be displayed
+    * Waiting
+    * User clicks the button with description "Confirm Order"
+    Then a pop-up message "Please select payment method." should be displayed.
+  * Driver turns off
+
+
 
   Scenario: Invalid card information
-    Given the user navigates to the Payment Information page
-    When the user selects "Stripe" as the payment method
-    And the user enters invalid card information
-    And the user clicks on the "Confirm Order" button
-    Then an error message "Invalid card details" should be displayed
+    * User clicks the button with description "Stripe"
+    * Waiting
+    * User clicks the button with description "Confirm Order"
+    * The user clicks card Number Box.
+    And The user enters invalid card information
+    * The user clicks the confirm button to approve the payment.
+    Then a pop-up message "Your card number is invalid" should be displayed.
+    * Driver turns off
 
   Scenario: Cancel payment and resume shopping
-    Given the user navigates to the Payment Information page
-    When the user clicks on the "Back to Shopping" button
-    Then the shopping process should be resumed
-
+    Given The user navigates to the Payment Information page
+    When The user clicks on the "Back to Shopping" button
+    Then The shopping process should be resumed
+    * Driver turns off
 
 
 
