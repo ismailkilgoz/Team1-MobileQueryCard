@@ -286,13 +286,18 @@ public class ReturnPage {
         assertTrue(goToOrderDetailsButton.isDisplayed());
         goToOrderDetailsButton.click();
 
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryTitle));
+
         assertTrue(orderHistoryTitle.isDisplayed());
         String title = orderHistoryTitle.getAttribute("content-desc");
 
         assertTrue(title.contains("Order History"));
+
     }
 
     public void cancelOrderIsEnabled() throws InvalidMidiDataException {
+
+
         assertTrue(cancelOrderButton.isEnabled());
         String exceptedText = cancelOrderButton.getAttribute("content-desc");
         assertTrue(exceptedText.contains("Cancel Order"));
@@ -387,11 +392,14 @@ public class ReturnPage {
         assertTrue(qcUrlOnlineOrdersFilterStatusPending.isEnabled());
         qcUrlOnlineOrdersFilterStatusPending.click();
 
+        OptionsMet.swipe(600,600,600,700);
+        ReusableMethods.wait(1);
+
         assertTrue(qcUrlOnlineOrdersFilterCostumer.isEnabled());
         qcUrlOnlineOrdersFilterCostumer.click();
         qcUrlOnlineOrdersFilterCostumer.sendKeys("mustafa");
         ReusableMethods.wait(2);
-        OptionsMet.hideKeyboard();
+
 
         wait.until(ExpectedConditions.visibilityOf(qcUrlOnlineOrdersFilterSelectMustafa));
 
