@@ -164,14 +164,16 @@ public class ReusableMethods {
     public static void VerifyTextDisplayedWithDesc(String text){
         WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(30));
 
-        WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+      WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiSelector().description(\"" + text + "\")"));
         wait.until(ExpectedConditions.visibilityOf(webElement));
 
+
+
+        Assert.assertTrue(webElement.isDisplayed());
         String actualText= webElement.getAttribute("content-desc");
         System.out.println("ActualText : " + actualText);
-        Assert.assertTrue("ActualText does not match! Expected: " + text + ", but Found: " + actualText,
-                actualText.contains(text));
+       Assert.assertTrue("ActualText does not match! Expected: " + text + ", but Found: " + actualText,  actualText.contains(text));
 
 
 

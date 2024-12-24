@@ -30,6 +30,7 @@ public class PaymentStepdefinition {
     ExcelDataReader excelDataReader=new ExcelDataReader(ConfigReader.getProperty("userAccess"));
         PaymentPage paymentPage=new PaymentPage();
         static Faker faker=new Faker();
+    static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     @Given("The user is signed in as cusmoter seren")
     public void the_user_is_signed_in() {
        excelDataReader.signInWithExcelData(excelDataReader,6,4);
@@ -76,16 +77,12 @@ public class PaymentStepdefinition {
     }
     @Then("a pop-up message {string} should be displayed.")
     public void an_error_message_should_be_displayed(String str) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
 
         WebElement textelement = wait.until(ExpectedConditions.visibilityOf(paymentPage.getSelectPaymentMethod()));
             String strText= textelement.getAttribute("content-desc");
         System.out.println(strText);
         // Elementin görünüp görünmediğini kontrol et
             Assert.assertTrue(strText.contains(str));
-
-
 
        ReusableMethods.wait(2);
 
@@ -94,6 +91,16 @@ public class PaymentStepdefinition {
     @Given("The user enters invalid card information")
     public void the_user_enters_invalid_card_information() {
      paymentPage.fillCreditCardDetailsWithInvalidCard();
+    }
+
+    @Then("an error message {string} should be displayed.")
+    public void an_error_message_should_be_displayed_(String errorText) {
+        ReusableMethods.waitForElement(driver,paymentPage.getInvalidCardMessage(),15);
+
+        String errorMessage= paymentPage.getInvalidCardMessage().getAttribute("text");
+        System.out.println("Actual Error Message: "+errorMessage);
+        Assert.assertEquals(errorText,errorMessage);
+
     }
 
 }

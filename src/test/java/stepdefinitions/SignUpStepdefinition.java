@@ -22,7 +22,7 @@ public class SignUpStepdefinition {
 
     SignUpPage signUpPage=new SignUpPage();
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
-
+    static WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(20));
     @Given("User clicks on the name button enters a valid {string}.")
     public void user_clicks_on_the_button_enters_a_valid( String firstName) {
         ReusableMethods.wait(2);
@@ -31,6 +31,7 @@ public class SignUpStepdefinition {
     }
     @Given("The user switches to {string} input field if needed")
     public void the_user_switches_to_input_field_if_needed(String inputType) {
+        ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
         signUpPage.SelectSingUpWithEmail(inputType);
     }
     @Given("The user enters {string} in the input field")
@@ -75,6 +76,31 @@ public class SignUpStepdefinition {
     @Given("User leaves {string} empty by {string} , clicks the button with description Sign Up and should see a validation message {string}.")
     public void user_leaves_empty( String field, String input_type,String message ) {
         signUpPage.verifyRequiredFieldIsNotEmpty(input_type ,field,message);
+    }
+
+    @Then("an error message {string} should be displayed on singUp Page.")
+    public void an_error_message_should_be_displayed_on_sing_up_page(String errorText) {
+
+        /*WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + errorText + "\")"));
+       ReusableMethods.waitForElement(driver,webElement,15);
+        String actualText= webElement.getAttribute("content-desc");
+        System.out.println("ActualText : " + actualText);
+        ReusableMethods.wait(4);
+        Assert.assertTrue(webElement.isDisplayed());
+
+         */
+        System.out.println(errorText);
+        ReusableMethods.waitForElement(driver,signUpPage.getErrorEmailMessage(),15);
+        Assert.assertTrue(signUpPage.getErrorEmailMessage().isDisplayed());
+
+    }
+
+    @Given("The user switches to {string} input field if needed.")
+    public void the_user_switches_to_input_field_if_needed_(String string) {
+        ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
+        signUpPage.getUseEmail().click();
+        System.out.println(string);
     }
 
 
