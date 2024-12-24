@@ -23,7 +23,7 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
 
 
 
-  @seren
+
   Scenario:[US_006] TC02 Password reset with a valid phone number
 
     * User clicks the button with description "Profile"

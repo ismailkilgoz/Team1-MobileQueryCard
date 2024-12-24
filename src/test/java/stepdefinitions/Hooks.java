@@ -10,30 +10,44 @@ import org.openqa.selenium.OutputType;
 import utilities.Driver;
 
 public class Hooks {
-    /*
+/*
     @Before
     public void setUp(Scenario scenario) {
         System.out.println("Scenario setup: " + scenario.getName());
-        Driver.getAppiumDriver(); // Her senaryo/örnek için driver başlatılır
+
+        if (scenario.getSourceTagNames().contains("@Outline")) {
+            System.out.println("Starting driver for Scenario Outline: " + scenario.getName());
+            if (Driver.getDriverInstance() == null) {
+                Driver.getAppiumDriver();
+            }
+        }
     }
+
 
     @After
     public void tearDown(Scenario scenario) {
+        System.out.println("Scenario teardown: " + scenario.getName());
+
         if (scenario.isFailed()) {
-            System.out.println("Test failed: " + scenario.getName());
+            System.out.println("Scenario failed: " + scenario.getName());
             try {
-                final byte[] screenshot = ((AppiumDriver) Driver.getAppiumDriver())
-                        .getScreenshotAs(OutputType.BYTES);
+                final byte[] screenshot = ((Driver.getAppiumDriver())
+                        .getScreenshotAs(OutputType.BYTES));
                 scenario.attach(screenshot, "image/png", "Failure Screenshot");
             } catch (Exception e) {
                 System.out.println("Failed to capture screenshot: " + e.getMessage());
             }
         }
-        Driver.quitAppiumDriver(); // Her senaryo/örnek için driver kapatılır
-        System.out.println("Driver quit after scenario: " + scenario.getName());
+
+        // Eğer sadece @Outline senaryoları için driver kapatmak istiyorsanız:
+        if (scenario.getSourceTagNames().contains("@Outline")) {
+            Driver.quitAppiumDriver();
+            System.out.println("Driver quit after Scenario Outline: " + scenario.getName());
+        }
     }
 
-     */
+ */
+
 
 }
 

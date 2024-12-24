@@ -167,9 +167,6 @@ public class ReusableMethods {
       WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiSelector().description(\"" + text + "\")"));
         wait.until(ExpectedConditions.visibilityOf(webElement));
-
-
-
         Assert.assertTrue(webElement.isDisplayed());
         String actualText= webElement.getAttribute("content-desc");
         System.out.println("ActualText : " + actualText);
@@ -178,6 +175,43 @@ public class ReusableMethods {
 
 
     }
+    public static void scrollAndClick(String text) {
+        try {
+            WebElement element = null;
+
+            // Aşağı kaydırma ve elementi bulma
+            try {
+                element = driver.findElement(MobileBy.AndroidUIAutomator(
+                        "new UiScrollable(new UiSelector().scrollable(true).instance(0))" +
+                                ".scrollIntoView(new UiSelector().description(\"" + text + "\"))"));
+            } catch (Exception e) {
+                System.out.println("Element aşağı kaydırılarak bulunamadı: " + text);
+            }
+
+            // Yukarı kaydırma ve elementi bulma (eğer aşağıda bulunamadıysa)
+            if (element == null) {
+                try {
+                    element = driver.findElement(MobileBy.AndroidUIAutomator(
+                            "new UiScrollable(new UiSelector().scrollable(true).instance(0).flingBackward())" +
+                                    ".scrollIntoView(new UiSelector().description(\"" + text + "\"))"));
+                } catch (Exception e) {
+                    System.out.println("Element yukarı kaydırılarak bulunamadı: " + text);
+                }
+            }
+
+            // Element bulunduysa tıklama
+            if (element != null) {
+                element.click();
+                System.out.println("Element bulundu ve tıklandı: " + text);
+            } else {
+                System.out.println("Element bulunamadı: " + text);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Unable to find or click the element: " + text);
+        }
+    }
+
 
 
 
