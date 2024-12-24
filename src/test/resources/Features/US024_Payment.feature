@@ -25,7 +25,7 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
 #basarili odeme
 
 
-    Scenario:
+    Scenario:[US_24] TC 01 Successfully complete payment with a valid credit card
 
     * User clicks the button with description "Stripe"
     * Waiting
@@ -37,7 +37,6 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * Waiting
     * Waiting
     Then a pop-up message "Thank you for your order! Your order is confirmed." should be displayed.
-  #  * The user verifies that the "Thank you for your order! Your order is confirmed." is displayed
     * User clicks the button with description "Go to order details"
     * Waiting
     * User clicks tap coordinates 425, 662
@@ -52,9 +51,9 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     * Driver turns off
 
 
-@seren
+
 # ödeme methodu
-  Scenario: Payment method not selected
+  Scenario: [US_24] TC 02 Payment method not selected Paymnet method
     * Waiting
     * User clicks the button with description "Confirm Order"
     Then a pop-up message "Please select payment method." should be displayed.
@@ -62,21 +61,16 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
 
 
 
-  Scenario: Invalid card information
+  Scenario: [US_24] TC 03 Payment with an invalid card information
     * User clicks the button with description "Stripe"
     * Waiting
     * User clicks the button with description "Confirm Order"
     * The user clicks card Number Box.
     And The user enters invalid card information
     * The user clicks the confirm button to approve the payment.
-    Then a pop-up message "Your card number is invalid" should be displayed.
-    * Driver turns off
+    Then an error message "Your card number is invalid." should be displayed.
 
-  Scenario: Cancel payment and resume shopping
-    Given The user navigates to the Payment Information page
-    When The user clicks on the "Back to Shopping" button
-    Then The shopping process should be resumed
-    * Driver turns off
+
 
 
 

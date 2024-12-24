@@ -2,14 +2,18 @@ package stepdefinitions;
 
 import Page.ForgotPasswordPage;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.Given;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
+
+import static utilities.Driver.getAppiumDriver;
 
 public class ForgotPasswordStepdefinition {
 
     ForgotPasswordPage forgotPasswordPage=new ForgotPasswordPage();
-
+    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
     @Given("The user enters a valid email {string} into the email box.")
     public void the_user_enters_a_valid_email_into_the_email_box(String mail) {
@@ -23,11 +27,16 @@ public class ForgotPasswordStepdefinition {
 
     @Given("Verifies succes Message {string} in dashboard.")
     public void verifies_username_in_dashboard(String expectedMessage) {
-        ReusableMethods.VerifyTextDisplayedWithDesc(expectedMessage);
+        String actualText= forgotPasswordPage.getSuccessMessageText().getAttribute("content-desc");
+        System.out.println("ActualText : " + actualText);
+        Assert.assertTrue(actualText.contains(expectedMessage));
     }
     @Given("Verifies confirmation message {string} in dashboard.")
     public void verifies_confirmation_message_in_dashboard(String expectedMessage) {
-        ReusableMethods.VerifyTextDisplayedWithDesc(expectedMessage);
+        String actualText= forgotPasswordPage.getPassResetMessage().getAttribute("content-desc");
+        System.out.println("ActualText : " + actualText);
+        Assert.assertTrue(actualText.contains(expectedMessage));
+
     }
 
 
