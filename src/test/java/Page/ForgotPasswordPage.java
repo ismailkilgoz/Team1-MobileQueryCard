@@ -37,6 +37,12 @@ public class ForgotPasswordPage extends BasePage{
     private WebElement emailBox;
 
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Success\n" +
+            "Your password reset Successfully.\")")
+    private WebElement passResetMessage;
+
+
+
 
 
 }
