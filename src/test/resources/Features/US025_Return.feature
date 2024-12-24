@@ -47,3 +47,4 @@ Feature:  [US_025]  Return
     * Go to dashboard from profile icon
       # Admin islemlerini yapabilmek icin Dashboard'a tiklanir
     * Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.
+
