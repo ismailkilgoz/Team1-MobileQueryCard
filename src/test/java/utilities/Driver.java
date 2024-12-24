@@ -62,9 +62,11 @@ public class Driver {
     public static void startActivity(String appPackage, String appActivity, boolean noReset) {
         if (getAppiumDriver() instanceof AndroidDriver) {
             UiAutomator2Options options = new UiAutomator2Options();
+            options.setPlatformName("Android").setAutomationName("UiAutomator2");
             options.setAppPackage(appPackage);
             options.setAppActivity(appActivity);
             options.setNoReset(noReset); // noReset ayarı
+            options.setUdid("emulator-5554");
 
             try {
                 // Mevcut sürücüyle yeni bir aktivite başlatılıyor

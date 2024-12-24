@@ -11,6 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -144,17 +145,39 @@ public class ReturnPage {
     @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.EditText\").instance(2)"))
     private WebElement qcUrlOnlineOrdersFilterCostumer;
 
-    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.view.View\").instance(20)"))
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.EditText\").instance(1)"))
     private WebElement qcUrlOnlineOrdersFilterStatus;
 
-    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"vs159-option-0\")"))
+    @AndroidFindBy(xpath = ("//*[contains(@text, 'Pending')]"))
     private WebElement qcUrlOnlineOrdersFilterStatusPending;
 
-    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"vs904-option-124\")"))
+    @AndroidFindBy(xpath = ("(//*[contains(@text, 'mustafa')])[3]"))
     private WebElement qcUrlOnlineOrdersFilterSelectMustafa;
 
     @AndroidFindBy(xpath = ("//android.widget.Button[@text=\"Search\"]"))
     private WebElement qcUrlOnlineOrdersFilterSearchBtn;
+
+    @AndroidFindBy(xpath = ("//*[contains(@bounds, '[1140,1479][1185,1539]')]"))
+    private WebElement qcUrlOnlineOrdersTopOrder;
+
+    @AndroidFindBy(xpath = ("//android.widget.Button[@text=\"Accept\"]"))
+    private WebElement qcUrlOnlineOrdersAcceptOrder;
+
+    @AndroidFindBy(xpath = ("//android.widget.Button[@text=\"Yes, Accept it!\"]"))
+    private WebElement qcUrlOnlineOrdersYesAcceptIt;
+
+    @AndroidFindBy(xpath = ("//android.widget.TextView[@text=\"Confirmed\"]"))
+    private WebElement qcUrlOnlineOrdersConfirmed;
+
+    //Welcome to Chrome
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"com.android.chrome:id/terms_accept\")"))
+    private WebElement chromeAcceptContinue;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"com.android.chrome:id/negative_button\")"))
+    private WebElement chromeNoThanks;
+
+
 
 
 
@@ -278,17 +301,32 @@ public class ReturnPage {
     public void googleSearchToQueryCart(){
         //WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(10));
         //wait.until(ExpectedConditions.visibilityOf(googleSearchBox));
-        ReusableMethods.wait(3);
+
+        // ******* Welcome to Chrome ********
+
+        //assertTrue(chromeAcceptContinue.isEnabled());
+        //chromeAcceptContinue.click();
+        //ReusableMethods.wait(1);
+
+        //assertTrue(chromeNoThanks.isEnabled());
+        //chromeNoThanks.click();
+
+        ReusableMethods.wait(2);
         assertTrue(googleSearchBox.isEnabled());
         googleSearchBox.sendKeys("querycart.com/#/home");
+        //googleSearchBox.sendKeys("https://querycart.com/#/admin/dashboard");
+
 
         assertTrue(googleSearchClick.isEnabled());
         googleSearchClick.click();
-        ReusableMethods.wait(3);
 
     }
 
     public void signInFromUrl(){
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(queryCardUrlLogin));
+
         assertTrue(queryCardUrlLogin.isEnabled());
         queryCardUrlLogin.click();
         ReusableMethods.wait(2);
@@ -306,10 +344,14 @@ public class ReturnPage {
     }
 
     public void goToDashboard(){
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(qcUrlProfileButton));
+
         assertTrue(qcUrlProfileButton.isEnabled());
         qcUrlProfileButton.click();
         ReusableMethods.wait(1);
 
+        wait.until(ExpectedConditions.visibilityOf(qcUrlDashboardButton));
         assertTrue(qcUrlDashboardButton.isEnabled());
         qcUrlDashboardButton.click();
         ReusableMethods.wait(1);
@@ -321,8 +363,10 @@ public class ReturnPage {
 
     }
 
-    public void confirmOrder(){
-        ReusableMethods.wait(2);
+    public void confirmOrder() throws InvalidMidiDataException {
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(qcUrlDashboardMenuForSideBarBtn));
+
         assertTrue(qcUrlDashboardMenuForSideBarBtn.isEnabled());
         qcUrlDashboardMenuForSideBarBtn.click();
         ReusableMethods.wait(1);
@@ -346,9 +390,11 @@ public class ReturnPage {
         assertTrue(qcUrlOnlineOrdersFilterCostumer.isEnabled());
         qcUrlOnlineOrdersFilterCostumer.click();
         qcUrlOnlineOrdersFilterCostumer.sendKeys("mustafa");
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
+        OptionsMet.hideKeyboard();
 
-        ReusableMethods.wait(1);
+        wait.until(ExpectedConditions.visibilityOf(qcUrlOnlineOrdersFilterSelectMustafa));
+
         assertTrue(qcUrlOnlineOrdersFilterSelectMustafa.isEnabled());
         qcUrlOnlineOrdersFilterSelectMustafa.click();
 
@@ -357,5 +403,30 @@ public class ReturnPage {
         ReusableMethods.wait(1);
 
         qcUrlOnlineOrdersFilter.click();
+
+        ReusableMethods.wait(2);
+        OptionsMet.swipe(1250,1600,50,1600);
+        OptionsMet.swipe(1250,1600,50,1600);
+        ReusableMethods.wait(1);
+
+        assertTrue(qcUrlOnlineOrdersTopOrder.isEnabled());
+        qcUrlOnlineOrdersTopOrder.click();
+
+        ReusableMethods.wait(3);
+
+        assertTrue(qcUrlOnlineOrdersAcceptOrder.isEnabled());
+        qcUrlOnlineOrdersAcceptOrder.click();
+
+        ReusableMethods.wait(2);
+
+        assertTrue(qcUrlOnlineOrdersYesAcceptIt.isEnabled());
+        qcUrlOnlineOrdersYesAcceptIt.click();
+
+        ReusableMethods.wait(2);
+
+        assertTrue(qcUrlOnlineOrdersConfirmed.isEnabled());
+        String actualStatus = qcUrlOnlineOrdersConfirmed.getAttribute("text");
+        assertTrue(actualStatus.contains("Confirmed"));
+
     }
 }
