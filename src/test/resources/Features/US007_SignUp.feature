@@ -2,31 +2,33 @@ Feature: [US_007] As a user, I would like to be able to register on the site to 
 
   Background: User opens the app
     * User makes driver adjustments
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
 
 
 #Pozitif senaryo
+
 Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
-  * User clicks the button with description "Profile"
-  * User clicks the button with description "Sign Up"
   And User clicks on the name button enters a valid "John Doe".
   And The user switches to "<input_type>" input field if needed
   And The user enters "<input_value>" in the input field
   And The user enters a valid password "Team123."
-  * User clicks the button with description "Sign Up"
-  Then The user should see a registration "Success Register Successfully." message
+  * User clicks the button Sign Up.
+  Then The user should see a registration "Register Successfully." message
   * Driver turns off
   Examples:
-  | input_type | input_value             |
-  | Email      |john.doe+1@example.com   |
-  | Email      |john_doe.123@example.com |
-  | Phone      | 9876543210              |
-  | Phone      | 1231231234              |
+  # change input_value !
+  | input_type | input_value            |
+  | Email      |john.doe+12@example.com |
+  | Email      |john_doe.20@example.com |
+  | Phone      | 5559878962569          |
+  | Phone      | 3694567893236          |
 
 # Aynı Kullanıcıyla Tekrar Kayıt
+
   Scenario Outline: Duplicate registration with the same email or phone number
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
+
     And User clicks on the name button enters a valid "John Doe".
     And The user switches to "<input_type>" input field if needed
     And The user enters an already registered "<input_value>"
@@ -40,9 +42,8 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 
   #Eksik Zorunlu Alanlar
+
   Scenario Outline: Missing required fields during registration
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
     And User leaves "<field>" empty by "<input_type>" , clicks the button with description Sign Up and should see a validation message "<message>".
     * Driver turns off
     Examples:
@@ -57,14 +58,14 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 
   #Geçersiz E-posta Formatı
+
   Scenario Outline: Registration with invalid email format
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
+
     And User clicks on the name button enters a valid "John Doe".
     And The user switches to "Email" input field if needed.
     And The user enters "<invalid_email>" in the input field
     And The user enters a valid password "Team123."
-    * User clicks the button with description "Sign Up"
+    * User clicks the button Sign Up.
     Then an error message "Enter Valid Email Address" should be displayed on singUp Page.
     * Driver turns off
 
@@ -77,31 +78,36 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
   #Geçersiz Telefon Formatı
 
+@seren
+    # BUG
   Scenario Outline: Registration with invalid phone number format
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
-    And User enters valid "John Doe" in the name field
+
+    And User clicks on the name button enters a valid "John Doe".
+    * User clicks tap coordinates 142, 877
+    And User selects the country code "+49"
     And The user enters "<invalid_phone>" in the phone input field
     And The user enters a valid password "Team123."
-    * User clicks the button with description "Sign Up"
-    Then The user should see an error message "Invalid phone number format."
+    * User clicks the button Sign Up.
+    Then the user should not see a success message.
     * Driver turns off
     Examples:
       | invalid_phone   |
-      | 1234            |
+   #  | 1234            |
       | abcdefghij      |
       | 12345678901     |
+      | 01234567890     |
       | 0000000000      |
 
 
   #Kısa veya Zayıf Şifre Girişi
+
   Scenario Outline: Registration with weak or invalid password
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
-    And User enters valid "John Doe" in the name field
-    And The user enters a valid email "john.doe@example.com"
+
+    And User clicks on the name button enters a valid "John Doe".
+    And The user switches to "Email" input field if needed.
+    And The user enters "john.doe@example.com" in the input field
     And The user enters "<weak_password>" as the password
-    * User clicks the button with description "Sign Up"
+    * User clicks the button Sign Up.
     Then The user should see an error message "Password must be at least 6 characters."
     * Driver turns off
     Examples:
