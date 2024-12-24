@@ -63,13 +63,6 @@ public class PaymentPage extends BasePage {
             "Please select payment method.\")")
     private  WebElement selectPaymentMethod;
 
-    //  new UiSelector().description("Error
-    //Please select payment method.")
-
-    //  new UiSelector().resourceId("card-errors")
-//  invalidCardMessage;
-    //Your card number is invalid.
-
 
     public void fillCreditCardDetails(){
 
