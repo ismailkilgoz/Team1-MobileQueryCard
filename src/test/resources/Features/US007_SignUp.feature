@@ -1,6 +1,8 @@
 Feature: [US_007] As a user, I would like to be able to register on the site to take advantage of its functions
+
   Background: User opens the app
     * User makes driver adjustments
+
 
 #Pozitif senaryo
 Scenario Outline: Successful Registration with Dynamic Email or Phone Field
@@ -45,29 +47,33 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     * Driver turns off
     Examples:
       |input_type|field   |message               |
-    # |Email     |Name    |This field is required|
-    # |Email     |Email   |Email is required     |
+      |Email     |Name    |This field is required|
+      |Email     |Email   |Email is required     |
       |Email     |Password|Passord is required   |
       |Phone     |Name    |This field is required|
       |Phone     |Phone   |This field is required|
       |Phone     |Password|Passord is required   |
 
 
+
   #Geçersiz E-posta Formatı
   Scenario Outline: Registration with invalid email format
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
-    And User enters valid "John Doe" in the name field
-    And The user enters "<invalid_email>" in the email input field
+    And User clicks on the name button enters a valid "John Doe".
+    And The user switches to "Email" input field if needed.
+    And The user enters "<invalid_email>" in the input field
     And The user enters a valid password "Team123."
     * User clicks the button with description "Sign Up"
-    Then The user should see an error message "Invalid email format."
+    Then an error message "Enter Valid Email Address" should be displayed on singUp Page.
+    * Driver turns off
+
     Examples:
-      | invalid_email       |
-      | johndoe@example     |
-      | johndoe@.com        |
-      | @example.com        |
-      | johndoeexample.com  |
+         |invalid_email     |
+         |johndoe@example   |
+         |johndoe@.com      |
+         |@example.com      |
+         |johndoeexample.com|
 
   #Geçersiz Telefon Formatı
 
@@ -79,6 +85,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     And The user enters a valid password "Team123."
     * User clicks the button with description "Sign Up"
     Then The user should see an error message "Invalid phone number format."
+    * Driver turns off
     Examples:
       | invalid_phone   |
       | 1234            |
@@ -96,6 +103,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     And The user enters "<weak_password>" as the password
     * User clicks the button with description "Sign Up"
     Then The user should see an error message "Password must be at least 6 characters."
+    * Driver turns off
     Examples:
       | weak_password |
       | 12345         |

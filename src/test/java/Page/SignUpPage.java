@@ -64,6 +64,13 @@ public class SignUpPage extends BasePage{
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Already have an account?\")")
     private WebElement alreadyHaveAnAccountText;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")")
+    private WebElement useEmail;
+
+    @AndroidFindBy(uiAutomator = " new UiSelector().description(\"Enter Valid Email Address\")")
+    private WebElement errorEmailMessage;
+
+
 
 
 
@@ -301,6 +308,8 @@ public class SignUpPage extends BasePage{
         }
         return shuffled.toString();
     }
+
+
 
 
 }
