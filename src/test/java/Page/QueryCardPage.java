@@ -158,6 +158,8 @@ public class QueryCardPage {
     @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
     private WebElement juniorCategoryFilterButton;
 
+    @AndroidFindBy (uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(2)")
+    private WebElement emptySearchBoxElement;
 
 
 
