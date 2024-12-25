@@ -5,9 +5,9 @@ Background:
   * User clicks the button with description "Sign In"
   * User click the button Use Email Instead and sendKeys "xaverne.user@querycart.com"
   * User clicks the button "signInLoginButton"
-      # Kayitli bir kullanici olarak (adres bilgileri girilmis), giris yapilmali
   * User clicks the button with description "Profile"
   * Verifies username "xaver" in dashboard
+
   Scenario: Verify "Order History" menu item is visible and active.
     * User verify that "Order History" item is visible
 
