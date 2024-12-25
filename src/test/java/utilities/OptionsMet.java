@@ -72,7 +72,6 @@ public class OptionsMet {
         AndroidDriver driver = (AndroidDriver) getAppiumDriver();
         WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
                 "new UiSelector().description(\"" + description + "\")"));
-
         button.click();
     }
 

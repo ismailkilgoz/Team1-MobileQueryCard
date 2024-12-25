@@ -3,11 +3,11 @@ package utilities;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import lombok.Getter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-
 
 public class Driver {
     private Driver() {
@@ -20,7 +20,7 @@ public class Driver {
 
 
         /**  Gercek cihaz icin url "http:0.0.0.0:4723/wd/hub";
-             Emilator cihaz icin url "http:127.0.0.1:4723/wd/hub";
+         Emilator cihaz icin url "http:127.0.0.1:4723/wd/hub";
          *******   Driver null olduğunda telefonumuza ait özellikleri hazırlarız
          */
         if (driver == null) {
@@ -28,7 +28,7 @@ public class Driver {
                 case "Android":
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
-                   // options.setApp("C:/Users/MONSTER/Downloads/querycart2006.apk/");
+                    // options.setApp("C:/Users/MONSTER/Downloads/querycart2006.apk/");
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");
@@ -58,6 +58,27 @@ public class Driver {
          */
 
         return driver;
+    }
+    public static void startActivity(String appPackage, String appActivity, boolean noReset) {
+        if (getAppiumDriver() instanceof AndroidDriver) {
+            UiAutomator2Options options = new UiAutomator2Options();
+            options.setPlatformName("Android").setAutomationName("UiAutomator2");
+            options.setAppPackage(appPackage);
+            options.setAppActivity(appActivity);
+            options.setNoReset(noReset); // noReset ayarı
+            options.setUdid("emulator-5554");
+
+            try {
+                // Mevcut sürücüyle yeni bir aktivite başlatılıyor
+                ((AndroidDriver) getAppiumDriver()).startActivity(
+                        new io.appium.java_client.android.Activity(appPackage, appActivity)
+                );
+            } catch (Exception e) {
+                throw new RuntimeException("Aktivite başlatılamadı: " + e.getMessage());
+            }
+        } else {
+            throw new UnsupportedOperationException("Bu özellik yalnızca Android cihazlar için geçerlidir.");
+        }
     }
 
     public static void quitAppiumDriver() {

@@ -17,11 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Driver;
 import utilities.ReusableMethods;
-import java.util.Random;
+
+import java.util.*;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 import static utilities.Driver.getAppiumDriver;
@@ -64,12 +62,15 @@ public class SignUpPage extends BasePage{
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Already have an account?\")")
     private WebElement alreadyHaveAnAccountText;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"*Use Email Instead\")")
+    private WebElement useEmail;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Enter Valid Email Address\")")
+    private WebElement errorEmailMessage;
 
-
-
-
-
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Success\n" +
+            "Register Successfully.\")")
+    private WebElement successRegisteredMessage;
 
 
 
@@ -104,15 +105,6 @@ public class SignUpPage extends BasePage{
 
     }
 
-    public WebElement getButtonWebelementByDesc(String description){
-
-            WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
-                    "new UiSelector().description(\"" + description + "\")"));
-
-            //  new UiSelector().description("Error The email has already been taken.")
-
-     return button;
-    }
 
 
     public void verifyGetErrorMessage(String input_type, String expected_message) {
@@ -301,6 +293,26 @@ public class SignUpPage extends BasePage{
         }
         return shuffled.toString();
     }
+
+
+    public void verifySuccessMessageNotExist() {
+        try {
+            // Elementin varlığını kontrol et, bulunursa hata fırlat
+            if (successRegisteredMessage.isDisplayed()) {
+                System.out.println("Bug: Success message is displayed, but it shouldn't be.");
+                Assert.fail("Bug detected: Success message should not exist.");
+            }
+        } catch (NoSuchElementException e) {
+            // Locator bulunamazsa bu doğru bir davranış olarak kabul edilir
+            System.out.println("Success message is not present as expected.");
+        } catch (Exception e) {
+            // Beklenmeyen bir hata oluşursa bunu raporla
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+            Assert.fail("Unexpected error during success message validation.");
+
+        }
+    }
+
 
 
 }

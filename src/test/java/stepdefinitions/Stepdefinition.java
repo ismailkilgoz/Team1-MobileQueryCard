@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -21,7 +22,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User makes driver adjustments")
     public void user_makes_driver_adjustments() {
-        getAppiumDriver();
+      Driver.getAppiumDriver();
     }
 
     @Given("User confirms to be on the homepage")
@@ -31,7 +32,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with description {string}")
     public void user_clicks_the_button_with_description(String description) {
-        ReusableMethods.wait(6);
+       ReusableMethods.wait(6);
         clickButtonByDescription(description);
     }
 

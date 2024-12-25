@@ -68,7 +68,7 @@ public class ReusableMethods {
         getAppiumDriver().perform(singletonList(sequence));
            }
 
-  //  static AndroidDriver<AndroidElement> driver=Driver.getAppiumDriver();
+
     public static void koordinatTiklamaMethodu(int x,int y) throws InterruptedException {
         TouchAction action=new TouchAction((PerformsTouchActions) getAppiumDriver());
         action.press(PointOption.point(x,y)).release().perform();
@@ -161,25 +161,60 @@ public class ReusableMethods {
         driver.perform(Collections.singletonList(tap));
     }
 
-    public static void VerifyElementTextByGetAttribute(String expectedText, WebElement webelement){
+    public static void VerifyTextDisplayedWithDesc(String text){
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(30));
 
-        String actualText= webelement.getAttribute("content-desc");
+      WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + text + "\")"));
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        Assert.assertTrue(webElement.isDisplayed());
+        String actualText= webElement.getAttribute("content-desc");
         System.out.println("ActualText : " + actualText);
-        Assert.assertTrue("ActualText does not match! Expected: " + expectedText + ", but Found: " + actualText,
-                actualText.contains(expectedText));
-
-
-    }
-
-
-
-    public static void SignInWithEmail(int row){
-
-
+       Assert.assertTrue("ActualText does not match! Expected: " + text + ", but Found: " + actualText,  actualText.contains(text));
 
 
 
     }
+    public static void scrollAndClick(String text) {
+        try {
+            WebElement element = null;
+
+            // Aşağı kaydırma ve elementi bulma
+            try {
+                element = driver.findElement(MobileBy.AndroidUIAutomator(
+                        "new UiScrollable(new UiSelector().scrollable(true).instance(0))" +
+                                ".scrollIntoView(new UiSelector().description(\"" + text + "\"))"));
+            } catch (Exception e) {
+                System.out.println("Element aşağı kaydırılarak bulunamadı: " + text);
+            }
+
+            // Yukarı kaydırma ve elementi bulma (eğer aşağıda bulunamadıysa)
+            if (element == null) {
+                try {
+                    element = driver.findElement(MobileBy.AndroidUIAutomator(
+                            "new UiScrollable(new UiSelector().scrollable(true).instance(0).flingBackward())" +
+                                    ".scrollIntoView(new UiSelector().description(\"" + text + "\"))"));
+                } catch (Exception e) {
+                    System.out.println("Element yukarı kaydırılarak bulunamadı: " + text);
+                }
+            }
+
+            // Element bulunduysa tıklama
+            if (element != null) {
+                element.click();
+                System.out.println("Element bulundu ve tıklandı: " + text);
+            } else {
+                System.out.println("Element bulunamadı: " + text);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Unable to find or click the element: " + text);
+        }
+    }
+
+
+
+
 
 
 }

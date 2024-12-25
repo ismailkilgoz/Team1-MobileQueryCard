@@ -21,7 +21,7 @@ public class HomePage {
 
     }
 
-    @AndroidFindBy (uiAutomator = "new UiSelector().description(\"Popular Brands\")")
+    @AndroidFindBy (uiAutomator = "//android.view.View[@content-desc=\"Popular Brands\"]")
     public WebElement popularBrands;
 
     @AndroidFindBy (uiAutomator = "//android.view.View[@content-desc=\"Blossom Boutique\"]")
@@ -36,6 +36,9 @@ public class HomePage {
     @AndroidFindBy(uiAutomator = "//android.view.View[@content-desc=\"Clarks\"]")
     public WebElement Clarks;
 
+    @AndroidFindBy(uiAutomator = "AppiumBy.accessibilityId(\"Categories\")")
+    public  WebElement category;
+
 
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
@@ -47,6 +50,29 @@ public class HomePage {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(9)")
     public WebElement ArtiIcon;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Men Clothing\")")
+    public WebElement menClothing;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Classic Cargo Shorts\n" +
+            "0 (0  Reviews)\n" +
+            "$40.00\")")
+
+    public WebElement Classiccargoshort;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"M\")")
+    public WebElement ClassiccargoshortM;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(9)")
+    public WebElement ClassiccargoshortQuantity;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Add To Cart\")")
+    public WebElement addToCard;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Success\n" +
+            "Product added to cart\")")
+
+    public WebElement succes;
 
 
 }
