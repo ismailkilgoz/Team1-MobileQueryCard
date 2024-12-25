@@ -1,7 +1,3 @@
-Feature:  Demo E2E Testi
-
-  Scenario:
-
 
     #Kullanici ziyaretci olarak siteyi gezer, bir urun begenir ve favorilere ekler    /US23/Uygar
     #

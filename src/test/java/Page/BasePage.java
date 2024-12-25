@@ -12,16 +12,15 @@ import static utilities.Driver.getAppiumDriver;
 
 public abstract class BasePage {
 
-    public Actions actions;
+
     public Faker faker;
-   public TouchAction touchaAction;
+
 
     public BasePage() {
 
-        PageFactory.initElements(new AppiumFieldDecorator(getAppiumDriver()),this);
-        actions = new Actions(getAppiumDriver());
+
         faker = new Faker();
-        touchaAction= new TouchAction((PerformsTouchActions) getAppiumDriver());
+
 
     }
 
