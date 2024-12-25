@@ -16,7 +16,9 @@ public class SelectedProductPage extends BasePage{
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\n" + "0 (0  Reviews)\n" + "$65.00\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\")")
     public WebElement FlowerPrintFoilTshirt;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Size:\")")
@@ -31,7 +33,18 @@ public class SelectedProductPage extends BasePage{
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Review\")")
     public WebElement Review;
 
-    @AndroidFindBy(uiAutomator = "//android.view.View[@content-desc=\"Shipping & Return\"]")
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Shipping & Return\")")
     public WebElement ShippingReturn;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\").instance(1)")
+    public WebElement DetailsFlowerPrintFoilTshirt;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Product Videos\")")
+    public WebElement ProductVideos;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"0\").instance(1)")
+    public WebElement ProductReviews;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Shipping & Return\").instance(1)")
+    public WebElement ProductShippingReturn;
 }
