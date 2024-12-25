@@ -53,7 +53,7 @@ public class OrderHistoryPage {
     public static WebElement orderHistoryLink; //dashboard order history linki
 
     @AndroidFindBy(className = "android.widget.ImageView")
-    public static List<WebElement> orderLinksList; // order history sayfasındaki gerii dönüş tuşu ve orderlerin listesi
+    public static List<WebElement> orderLinksList; // order history sayfasındaki geri dönüş tuşu ve orderlerin listesi
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Download Receipt\")")
     public static WebElement downlandReceiptButton; //fatura indir butonu
