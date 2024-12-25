@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import Page.QueryCardPage;
 import Page.SignUpPage;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
@@ -21,6 +22,7 @@ import static utilities.Driver.getAppiumDriver;
 public class SignUpStepdefinition {
 
     SignUpPage signUpPage=new SignUpPage();
+
     public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
     static WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(20));
     @Given("User clicks on the name button enters a valid {string}.")
@@ -32,7 +34,8 @@ public class SignUpStepdefinition {
     @Given("The user switches to {string} input field if needed")
     public void the_user_switches_to_input_field_if_needed(String inputType) {
         ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
-        signUpPage.SelectSingUpWithEmail(inputType);
+       // signUpPage.SelectSingUpWithEmail(inputType);
+        signUpPage.getUseEmail().click();
     }
     @Given("The user enters {string} in the input field")
     public void the_user_enters_in_the_input_field(String inputValue) {
@@ -50,8 +53,12 @@ public class SignUpStepdefinition {
 
     @Then("The user should see a registration {string} message")
     public void the_user_should_see_a_registration_message(String message) {
-        Assert.assertTrue(signUpPage.getButtonWebelementByDesc(message).isDisplayed());
-        ReusableMethods.wait(6);
+        ReusableMethods.waitForElement(driver,signUpPage.getSuccessRegisteredMessage(),15);
+        String successMessage= signUpPage.getSuccessRegisteredMessage().getAttribute("content-desc");
+        System.out.println("Actual success Message: "+successMessage);
+
+        Assert.assertTrue(successMessage.contains(message));
+       // Assert.assertTrue(signUpPage.getSuccessRegisteredMessage().isDisplayed());
     }
 
 
@@ -80,16 +87,6 @@ public class SignUpStepdefinition {
 
     @Then("an error message {string} should be displayed on singUp Page.")
     public void an_error_message_should_be_displayed_on_sing_up_page(String errorText) {
-
-        /*WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
-                "new UiSelector().description(\"" + errorText + "\")"));
-       ReusableMethods.waitForElement(driver,webElement,15);
-        String actualText= webElement.getAttribute("content-desc");
-        System.out.println("ActualText : " + actualText);
-        ReusableMethods.wait(4);
-        Assert.assertTrue(webElement.isDisplayed());
-
-         */
         System.out.println(errorText);
         ReusableMethods.waitForElement(driver,signUpPage.getErrorEmailMessage(),15);
         Assert.assertTrue(signUpPage.getErrorEmailMessage().isDisplayed());
@@ -104,6 +101,27 @@ public class SignUpStepdefinition {
     }
 
 
+
+    @Given("User selects the country code {string}")
+    public void user_selects_the_country_code(String countryCode) {
+        ReusableMethods.scrollAndClick(countryCode);
+
+    }
+    @Given("The user enters {string} in the phone input field")
+    public void the_user_enters_in_the_phone_input_field(String phone) {
+        Assert.assertTrue(signUpPage.getPhoneOrEmailBox().isDisplayed());
+        signUpPage.getPhoneOrEmailBox().click();
+        signUpPage.getPhoneOrEmailBox().sendKeys(phone);
+    }
+    @Then("the user should not see a success message.")
+    public void the_user_should_not_see_a_success_message() {
+        signUpPage.verifySuccessMessageNotExist();
+    }
+
+    @Given("User clicks the button Sign Up.")
+    public void user_clicks_the_button() {
+    signUpPage.getSignUpButtonforUnsuccesMessage().click();
+    }
 
 
 }

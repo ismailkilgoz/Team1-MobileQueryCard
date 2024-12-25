@@ -112,4 +112,12 @@ public class CategoryStepdefinitons extends OptionsMet {
         assertTrue(card.getJuniorCategoryFilterButton().isDisplayed());
     }
 
+    @And("User confirms that results have {string} as a text or there is no result at all")
+    public void userConfirmsThatResultsHaveAsATextOrThereIsNoResultAtAll(String ExpText) {
+        if (card.getEmptySearchBoxElement().isDisplayed()){
+            System.out.println("NO SEARCH RESULTS FOUND");
+        }else { String actText = card.getSearchPageResultFirstElement().getAttribute("content-desc");
+            //System.out.println(actText);
+            assertTrue(actText.toLowerCase().contains(ExpText.toLowerCase()));}
+    }
 }

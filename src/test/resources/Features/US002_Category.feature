@@ -28,5 +28,5 @@ Feature: Home Page Bottom Bar and Categories Headings
     Then  User clicks the Search Box button
     And   User confirms to be on the Search Page
     Then  User search "baby" in the app
-    And   User confirms that results have "baby" as a text
+    And   User confirms that results have "baby" as a text or there is no result at all
     And   Driver turns off

@@ -3,6 +3,7 @@ package stepdefinitions;
 import Page.ReturnPage;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import utilities.Driver;
 import utilities.OptionsMet;
@@ -60,16 +61,14 @@ public class ReturnStepdefinitions {
     @Given("Switching from Query Cart application to Google Chrome")
     public void switching_from_query_cart_application_to_google_chrome() {
         ReusableMethods.wait(3);
-
         Driver.startActivity("com.android.chrome","com.google.android.apps.chrome.Main",false);
 
-        ReusableMethods.wait(2);
     }
     @Given("Go to the Query Cart url and log in with admin information")
     public void go_to_the_query_cart_url_and_log_in_with_admin_information() {
         returnPage.googleSearchToQueryCart();
         ReusableMethods.wait(3);
-        returnPage.signInFromUrl();
+        //returnPage.signInFromUrl();
     }
     @Given("Go to dashboard from profile icon")
     public void go_to_dashboard_from_profile_icon() {
@@ -77,7 +76,7 @@ public class ReturnStepdefinitions {
 
     }
     @Given("Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.")
-    public void go_to_the_online_orders_page_and_after_the_user_s_order_is_verified_it_is_confirmed_and_delivered() {
+    public void go_to_the_online_orders_page_and_after_the_user_s_order_is_verified_it_is_confirmed_and_delivered() throws InvalidMidiDataException {
         returnPage.confirmOrder();
 
     }
@@ -85,7 +84,34 @@ public class ReturnStepdefinitions {
     public void returns_to_the_query_cart_app_as_the_user() {
         Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity",false);
         System.out.println("Uygulamaya geri dönüldü.");
-
+        ReusableMethods.wait(5);
     }
+
+    @Given("User goes to the order history page via the profile")
+    public void user_goes_to_the_order_history_page_via_the_profile() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Given("Clicks on the product details and finds the product purchased")
+    public void clicks_on_the_product_details_and_finds_the_product_purchased() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Given("The return button should be displayed")
+    public void the_return_button_should_be_displayed() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Given("Perform return transactions")
+    public void perform_return_transactions() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Given("The return process has been initiated on the Return Orders page")
+    public void the_return_process_has_been_initiated_on_the_return_orders_page() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
 
 }

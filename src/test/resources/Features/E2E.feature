@@ -1,5 +1,6 @@
 Feature:  Demo E2E Testi
-
+  Background: User opens the app
+    * User makes driver adjustments
   Scenario:
 
 
@@ -20,6 +21,11 @@ Feature:  Demo E2E Testi
     #Tekrar QuaryCart uygulamasina donup onaylandigi gozlemlenir	 	/US25/Mustafa
     #
     # Kayitli kullanici, logout olur.   /US22/Rana
+    * User clicks profile button on the home page
+    * User verifies logout button is enable
+    * User verifies logout button clickable
+    * Toaster is displayed
+    * Driver turns off
     #	====================================================
     #
     #Kullanici aldigi urunu iade etmek ister ve order history'den iade islemleri baslatir	/US25/Mustafa
