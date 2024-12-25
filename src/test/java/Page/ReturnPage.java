@@ -4,14 +4,11 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
@@ -100,11 +97,15 @@ public class ReturnPage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Cancel Order\"]")
     private WebElement cancelOrderButton;
 
+    // Chrome Locateleri
+
     @AndroidFindBy(id = "com.android.chrome:id/search_box_text")
     private WebElement googleSearchBox;
 
     @AndroidFindBy(id = "com.android.chrome:id/line_2")
     private WebElement googleSearchClick;
+
+    // QueryCart url Locateleri
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Log In\"]")
     private WebElement queryCardUrlLogin;
@@ -167,7 +168,16 @@ public class ReturnPage {
     private WebElement qcUrlOnlineOrdersYesAcceptIt;
 
     @AndroidFindBy(xpath = ("//android.widget.TextView[@text=\"Confirmed\"]"))
-    private WebElement qcUrlOnlineOrdersConfirmed;
+    private WebElement qcUrlOrderDetailsConfirmed;
+
+    @AndroidFindBy(xpath = ("(//*[contains(@index, '0')])[32]"))
+    private WebElement qcUrlOnlineOrdersConfirmedSelectBox;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().text(\"Delivered\")"))
+    private WebElement qcUrlOnlineOrdersConfirmedSelectDelivered;
+
+    @AndroidFindBy(xpath = ("//android.widget.TextView[@text=\"Delivered\"]"))
+    private WebElement qcUrlOrderDetailsDelivered;
 
     //Welcome to Chrome
 
@@ -176,6 +186,51 @@ public class ReturnPage {
 
     @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"com.android.chrome:id/negative_button\")"))
     private WebElement chromeNoThanks;
+
+    // Return Request Locateleri
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Profile\")"))
+    private WebElement profileBtn;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Order History\")"))
+    private WebElement orderHistory;
+
+    @AndroidFindBy(xpath = ("(//*[contains(@package, 'com.wise.querycart')])[15]"))
+    private WebElement orderHistoryFirstBox;
+
+    @AndroidFindBy(xpath = ("//android.view.View[@content-desc=\"Delivered\"]"))
+    private WebElement orderHistoryStatusDelivered;
+
+    @AndroidFindBy(xpath = ("//android.view.View[@content-desc=\"Return Request\"]"))
+    private WebElement orderHistoryReturnRequestBtn;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.ImageView\").instance(1)"))
+    private WebElement orderHistoryReturnRequestSelectOrder;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.view.View\").instance(13)"))
+    private WebElement orderHistoryReturnRequestReason;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Sizing or fit issues\")"))
+    private WebElement orderHistoryReturnRequestReasonIssue;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.EditText\")"))
+    private WebElement orderHistoryReturnRequestNoteTextBox;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Request Return\").instance(1)"))
+    private WebElement orderHistoryReturnRequestReturnReqBtn;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Success\n" +
+            "Return request submitted successfully!\")"))
+    private WebElement orderHistoryReturnRequestAlertBox;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().className(\"android.widget.ImageView\").instance(0)"))
+    private WebElement orderHistoryReturnOrdersBackButton;
+
+    @AndroidFindBy(xpath = ("(//*[contains(@package, 'com.wise.querycart')])[15]"))
+    private WebElement returnOrdersFirstBox;
+
+    @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Pending\")"))
+    private WebElement returnOrdersReturnResponse;
 
 
 
@@ -190,6 +245,7 @@ public class ReturnPage {
     }
 
     public void pufferJacketProductFromHomePage() throws InvalidMidiDataException {
+        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10));
         homeButton.click();
         //ReusableMethods.ekranKaydirmaMethodu(700,1600,1000,700,500);
         OptionsMet.swipe(700,1600,700,500);
@@ -197,16 +253,17 @@ public class ReturnPage {
         ReusableMethods.wait(1);
         assertTrue(quiltedPufferJacket.isDisplayed());
         quiltedPufferJacket.click();
-        //ReusableMethods.ekranKaydirmaMethodu(700,1550,1000,700,750);
+
         OptionsMet.swipe(700,1550,700,750);
         ReusableMethods.wait(1);
         assertTrue(mediumSizeButton.isDisplayed());
         mediumSizeButton.click();
         ReusableMethods.wait(1);
+        OptionsMet.swipe(700,1600,700,1200);
         assertTrue(addToCartButton.isDisplayed());
         addToCartButton.click();
 
-        WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(10));
+
         wait.until(ExpectedConditions.visibilityOf(successAlertBox));
 
         successAlertBox.isDisplayed();
@@ -267,6 +324,7 @@ public class ReturnPage {
         assertTrue(mmYYTextBox.isDisplayed());
         mmYYTextBox.click();
         mmYYTextBox.sendKeys("1228");
+        ReusableMethods.wait(1);
 
         assertTrue(cvcTextBox.isDisplayed());
         cvcTextBox.click();
@@ -304,22 +362,10 @@ public class ReturnPage {
     }
 
     public void googleSearchToQueryCart(){
-        //WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(10));
-        //wait.until(ExpectedConditions.visibilityOf(googleSearchBox));
-
-        // ******* Welcome to Chrome ********
-
-        //assertTrue(chromeAcceptContinue.isEnabled());
-        //chromeAcceptContinue.click();
-        //ReusableMethods.wait(1);
-
-        //assertTrue(chromeNoThanks.isEnabled());
-        //chromeNoThanks.click();
 
         ReusableMethods.wait(2);
         assertTrue(googleSearchBox.isEnabled());
         googleSearchBox.sendKeys("querycart.com/#/home");
-        //googleSearchBox.sendKeys("https://querycart.com/#/admin/dashboard");
 
 
         assertTrue(googleSearchClick.isEnabled());
@@ -348,8 +394,9 @@ public class ReturnPage {
         qcUrlSigninButton.click();
     }
 
-    public void goToDashboard(){
+    public void goToDashboard() throws InvalidMidiDataException {
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
         wait.until(ExpectedConditions.visibilityOf(qcUrlProfileButton));
 
         assertTrue(qcUrlProfileButton.isEnabled());
@@ -432,9 +479,113 @@ public class ReturnPage {
 
         ReusableMethods.wait(2);
 
-        assertTrue(qcUrlOnlineOrdersConfirmed.isEnabled());
-        String actualStatus = qcUrlOnlineOrdersConfirmed.getAttribute("text");
+        assertTrue(qcUrlOrderDetailsConfirmed.isEnabled());
+        String actualStatus = qcUrlOrderDetailsConfirmed.getAttribute("text");
         assertTrue(actualStatus.contains("Confirmed"));
 
+        wait.until(ExpectedConditions.visibilityOf(qcUrlOnlineOrdersConfirmedSelectBox));
+        assertTrue(qcUrlOnlineOrdersConfirmedSelectBox.isEnabled());
+        qcUrlOnlineOrdersConfirmedSelectBox.click();
+
+        wait.until(ExpectedConditions.visibilityOf(qcUrlOnlineOrdersConfirmedSelectDelivered));
+        assertTrue(qcUrlOnlineOrdersConfirmedSelectDelivered.isEnabled());
+        qcUrlOnlineOrdersConfirmedSelectDelivered.click();
+
+        wait.until(ExpectedConditions.visibilityOf(qcUrlOrderDetailsDelivered));
+        String lastActualStatus = qcUrlOrderDetailsDelivered.getAttribute("text");
+        assertTrue(lastActualStatus.contains("Delivered"));
+
+    }
+
+    public void goToOrderHistory() {
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(profileBtn));
+
+        assertTrue(profileBtn.isEnabled());
+        profileBtn.click();
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistory));
+
+        assertTrue(orderHistory.isEnabled());
+        orderHistory.click();
+
+        ReusableMethods.wait(3);
+    }
+
+    public void selectOrderAndVerifyDelivery(){
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryFirstBox));
+
+        assertTrue(orderHistoryFirstBox.isEnabled());
+        orderHistoryFirstBox.click();
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryStatusDelivered));
+
+        String actualStatus = orderHistoryStatusDelivered.getAttribute("content-desc");
+        assertTrue(actualStatus.contains("Delivered"));
+
+        ReusableMethods.wait(1);
+    }
+
+
+    public void returnButtonIsEnabled() throws InvalidMidiDataException {
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+        ReusableMethods.wait(1);
+        OptionsMet.swipe(700,2500,700,500);
+        ReusableMethods.wait(1);
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryReturnRequestBtn));
+
+        assertTrue(orderHistoryReturnRequestBtn.isEnabled());
+    }
+
+    public void returnTransactions(){
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+        orderHistoryReturnRequestBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryReturnRequestSelectOrder));
+
+        assertTrue(orderHistoryReturnRequestSelectOrder.isEnabled());
+        orderHistoryReturnRequestSelectOrder.click();
+
+        assertTrue(orderHistoryReturnRequestReason.isEnabled());
+        orderHistoryReturnRequestReason.click();
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryReturnRequestReasonIssue));
+
+        assertTrue(orderHistoryReturnRequestReasonIssue.isEnabled());
+        orderHistoryReturnRequestReasonIssue.click();
+
+        assertTrue(orderHistoryReturnRequestNoteTextBox.isEnabled());
+        orderHistoryReturnRequestNoteTextBox.click();
+        orderHistoryReturnRequestNoteTextBox.sendKeys("kucuk geldi");
+
+        ReusableMethods.wait(1);
+        OptionsMet.hideKeyboard();
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryReturnRequestReturnReqBtn));
+
+        assertTrue(orderHistoryReturnRequestReturnReqBtn.isEnabled());
+        orderHistoryReturnRequestReturnReqBtn.click();
+
+        wait.until(ExpectedConditions.visibilityOf(orderHistoryReturnRequestAlertBox));
+
+        String alertMessage = orderHistoryReturnRequestAlertBox.getAttribute("content-desc");
+        assertTrue(alertMessage.contains("Success\n" +
+                "Return request submitted successfully!"));
+    }
+
+    public void confirmAcceptedReturnFromReturnOrdersPage(){
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(returnOrdersFirstBox));
+
+        assertTrue(returnOrdersFirstBox.isEnabled());
+        returnOrdersFirstBox.click();
+
+        wait.until(ExpectedConditions.visibilityOf(returnOrdersReturnResponse));
+
+        String returnResponse = returnOrdersReturnResponse.getAttribute("content-desc");
+        assertTrue(returnResponse.contains("Pending"));
     }
 }
