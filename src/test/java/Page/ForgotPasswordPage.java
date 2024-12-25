@@ -41,8 +41,12 @@ public class ForgotPasswordPage extends BasePage{
             "Your password reset Successfully.\")")
     private WebElement passResetMessage;
 
+    @AndroidFindBy(uiAutomator = "   new UiSelector().description(\"Error This phone does not exist.\")")
+    private WebElement phoneNotExist;
 
 
+    @AndroidFindBy(uiAutomator = "   new UiSelector().description(\"Error This email does not exist.\")")
+    private WebElement mailNotExist;
 
 
 }

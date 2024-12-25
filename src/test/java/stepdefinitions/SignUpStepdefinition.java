@@ -36,7 +36,8 @@ public class SignUpStepdefinition {
     public void the_user_switches_to_input_field_if_needed(String inputType) {
 
         ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
-        signUpPage.getUseEmail().click();
+       // signUpPage.getUseEmail().click();
+        signUpPage.SelectSingUpWithEmail(inputType);
     }
     @Given("The user enters {string} in the input field")
     public void the_user_enters_in_the_input_field(String inputValue) {
@@ -88,24 +89,21 @@ public class SignUpStepdefinition {
 
     @Then("an error message {string} should be displayed on singUp Page.")
     public void an_error_message_should_be_displayed_on_sing_up_page(String errorText) {
-      /*  System.out.println(errorText);
-        ReusableMethods.waitForElement(driver,signUpPage.getErrorEmailMessage(),15);
-        Assert.assertTrue(signUpPage.getErrorEmailMessage().isDisplayed());
 
-       */
-
-        ReusableMethods.waitForElement(driver,signUpPage.getShortPassText(),20);
-        String shortPass=signUpPage.getShortPassText().getAttribute("content-desc");
-        Assert.assertTrue(shortPass.contains(errorText));
-
+        WebElement errorMessage = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + errorText + "\")"));
+        ReusableMethods.waitForElement(driver,errorMessage,20);
+        String errMessage=errorMessage.getAttribute("content-desc");
+        System.out.println("ErrorMessage = " + errMessage);
+        Assert.assertTrue(errMessage.contains(errorText));
 
     }
 
-    @Given("The user switches to {string} input field if needed.")
-    public void the_user_switches_to_input_field_if_needed_(String string) {
+    @Given("The user switches to Email input field if needed.")
+    public void the_user_switches_to_input_field_if_needed_() {
         ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
         signUpPage.getUseEmail().click();
-        System.out.println(string);
+
     }
 
 
