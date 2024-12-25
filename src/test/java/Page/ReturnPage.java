@@ -97,11 +97,15 @@ public class ReturnPage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Cancel Order\"]")
     private WebElement cancelOrderButton;
 
+    // Chrome Locateleri
+
     @AndroidFindBy(id = "com.android.chrome:id/search_box_text")
     private WebElement googleSearchBox;
 
     @AndroidFindBy(id = "com.android.chrome:id/line_2")
     private WebElement googleSearchClick;
+
+    // QueryCart url Locateleri
 
     @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Log In\"]")
     private WebElement queryCardUrlLogin;
@@ -183,7 +187,7 @@ public class ReturnPage {
     @AndroidFindBy(uiAutomator = ("new UiSelector().resourceId(\"com.android.chrome:id/negative_button\")"))
     private WebElement chromeNoThanks;
 
-    // Return Request
+    // Return Request Locateleri
 
     @AndroidFindBy(uiAutomator = ("new UiSelector().description(\"Profile\")"))
     private WebElement profileBtn;
@@ -249,7 +253,7 @@ public class ReturnPage {
         ReusableMethods.wait(1);
         assertTrue(quiltedPufferJacket.isDisplayed());
         quiltedPufferJacket.click();
-        //ReusableMethods.ekranKaydirmaMethodu(700,1550,1000,700,750);
+
         OptionsMet.swipe(700,1550,700,750);
         ReusableMethods.wait(1);
         assertTrue(mediumSizeButton.isDisplayed());
@@ -358,22 +362,10 @@ public class ReturnPage {
     }
 
     public void googleSearchToQueryCart(){
-        //WebDriverWait wait = new WebDriverWait(getAppiumDriver(),Duration.ofSeconds(10));
-        //wait.until(ExpectedConditions.visibilityOf(googleSearchBox));
-
-        // ******* Welcome to Chrome ********
-
-        //assertTrue(chromeAcceptContinue.isEnabled());
-        //chromeAcceptContinue.click();
-        //ReusableMethods.wait(1);
-
-        //assertTrue(chromeNoThanks.isEnabled());
-        //chromeNoThanks.click();
 
         ReusableMethods.wait(2);
         assertTrue(googleSearchBox.isEnabled());
         googleSearchBox.sendKeys("querycart.com/#/home");
-        //googleSearchBox.sendKeys("https://querycart.com/#/admin/dashboard");
 
 
         assertTrue(googleSearchClick.isEnabled());
