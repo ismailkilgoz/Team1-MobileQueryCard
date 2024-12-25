@@ -93,16 +93,7 @@ public class SignUpPage extends BasePage{
                 if (driver.findElement(MobileBy.AccessibilityId("*Use Email Instead")).isDisplayed()) {
                     driver.findElement(MobileBy.AccessibilityId("*Use Email Instead")).click();
                 }
-            } /*else if (inputType.equals("Phone")) {
-
-                if (driver.findElement(MobileBy.AccessibilityId("*Use Phone Instead")).isDisplayed()) {
-                    driver.findElement(MobileBy.AccessibilityId("*Use Phone Instead")).click();
-                }else {
-                    
-                }
-
             }
-            */
 
     }
 

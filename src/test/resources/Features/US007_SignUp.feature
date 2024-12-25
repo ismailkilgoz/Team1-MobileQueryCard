@@ -4,7 +4,7 @@ Feature: [US_007] As a user, I would like to be able to register on the site to 
 
 #Pozitif senaryo
 @Outline
-Scenario Outline: Successful Registration with Dynamic Email or Phone Field
+Scenario Outline: [US_007] TC01 Successful Registration with Dynamic Email or Phone Field
   * User clicks the button with description "Profile"
   * User clicks the button with description "Sign Up"
   And User clicks on the name button enters a valid "John Doe".
@@ -24,7 +24,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 # Aynı Kullanıcıyla Tekrar Kayıt
   @Outline
-  Scenario Outline: Duplicate registration with the same email or phone number
+  Scenario Outline: [US_007] TC02  Duplicate registration with the same email or phone number
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
@@ -41,7 +41,7 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
   #Eksik Zorunlu Alanlar
   @Outline
-  Scenario Outline: Missing required fields during registration
+  Scenario Outline: [US_007] TC03 Missing required fields during registration
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
     And User leaves "<field>" empty by "<input_type>" , clicks the button with description Sign Up and should see a validation message "<message>".
@@ -58,12 +58,12 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 
   #Geçersiz E-posta Formatı
-  @Outline
-  Scenario Outline: Registration with invalid email format
+   @seren
+  Scenario Outline: [US_007] TC04 Registration with invalid email format
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
-    And The user switches to "Email" input field if needed.
+    And The user switches to Email input field if needed.
     And The user enters "<invalid_email>" in the input field
     And The user enters a valid password "Team123."
     * User clicks the button Sign Up.
@@ -77,12 +77,14 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
          |@example.com      |
          |johndoeexample.com|
 
+
+
   #Geçersiz Telefon Formatı
 
 
     # BUG
-  @Outline @seren
-  Scenario Outline: Registration with invalid phone number format
+  @Outline
+  Scenario Outline: [US_007] TC05 Registration with invalid phone number format
     * User makes driver adjustments
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
@@ -101,10 +103,10 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     Then the user should not see a success message.
     * Driver turns off
     Examples:
-      | invalid_phone   |
-      | abchlakttlpo    |
-      | 09575851776    |
-      | 00000000        |
+      | invalid_phone    |
+      | abchlhuhttlpo    |
+      | 09579951776      |
+      | 000000000        |
 
 
 
@@ -112,13 +114,13 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
   #Kısa veya Zayıf Şifre Girişi
   @Outline
-  Scenario Outline: Registration with weak or invalid password
+  Scenario Outline: [US_007] TC06 Registration with weak or invalid password
 
     * User makes driver adjustments
     * User clicks the button with description "Profile"
     * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
-    And The user switches to "Email" input field if needed.
+    And The user switches to Email input field if needed.
     And The user enters "john.doe@example.com" in the input field
     And The user enters "<weak_password>" as the password
     * User clicks the button Sign Up.
@@ -126,6 +128,6 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     * Driver turns off
     Examples:
       | weak_password |
-      | 12345         |
-      | abcd          |
+      | 12354         |
+      | abce          |
 
