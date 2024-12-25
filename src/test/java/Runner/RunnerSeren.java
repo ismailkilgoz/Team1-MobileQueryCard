@@ -9,10 +9,10 @@ import utilities.Driver;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty",
-                "json:target/cucumber.json",},
+                "json:target/cucumber.json","html:target/cucumber-reports/cucumber.html"},
         features = "src/test/resources/features",
         glue = "stepdefinitions",
-        tags = " @seren" ,
+        tags = "@seren and @Outline",  // tags = "@seren and not @Outline"
         dryRun = false
 
 
@@ -20,4 +20,7 @@ import utilities.Driver;
 public class RunnerSeren {
 
 
+
+
 }
+

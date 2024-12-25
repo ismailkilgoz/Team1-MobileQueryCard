@@ -8,7 +8,7 @@ import utilities.Driver;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty",
-                "json:target/cucumber.json",},
+                "json:target/cucumber.json","html:target/cucumber-reports/cucumber.html"},
         features = "src/test/resources/features",
         glue = "stepdefinitions",
         tags = "@" ,
@@ -17,9 +17,5 @@ import utilities.Driver;
 
 )
 public class Runner {
-    @AfterClass
-    public static void tearDown() {
-        Driver.quitAppiumDriver();
-        System.out.println("Driver quit after all tests.");
-    }
+
 }

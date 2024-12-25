@@ -1,3 +1,4 @@
+
 Feature: E2E Test
 
   Background: User opens the app
@@ -31,3 +32,4 @@ Feature: E2E Test
     * User verifies logout button clickable
     * Toaster is displayed
     * Driver turns off
+

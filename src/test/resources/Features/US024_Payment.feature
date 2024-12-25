@@ -69,7 +69,7 @@ Feature: [US_24] As a user, I would like to be able to register on the site to t
     And The user enters invalid card information
     * The user clicks the confirm button to approve the payment.
     Then an error message "Your card number is invalid." should be displayed.
-
+    * Driver turns off
 
 
 

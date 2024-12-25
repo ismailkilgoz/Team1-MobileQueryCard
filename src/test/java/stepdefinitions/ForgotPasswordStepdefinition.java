@@ -13,7 +13,7 @@ import static utilities.Driver.getAppiumDriver;
 public class ForgotPasswordStepdefinition {
 
     ForgotPasswordPage forgotPasswordPage=new ForgotPasswordPage();
-    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
+    AndroidDriver driver= (AndroidDriver) getAppiumDriver();
 
     @Given("The user enters a valid email {string} into the email box.")
     public void the_user_enters_a_valid_email_into_the_email_box(String mail) {

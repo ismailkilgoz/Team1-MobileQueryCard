@@ -1,15 +1,12 @@
 Feature: [US_007] As a user, I would like to be able to register on the site to take advantage of its functions
 
   Background: User opens the app
-    * User makes driver adjustments
-    * User clicks the button with description "Profile"
-    * User clicks the button with description "Sign Up"
-
 
 #Pozitif senaryo
-
+@Outline
 Scenario Outline: Successful Registration with Dynamic Email or Phone Field
-
+  * User clicks the button with description "Profile"
+  * User clicks the button with description "Sign Up"
   And User clicks on the name button enters a valid "John Doe".
   And The user switches to "<input_type>" input field if needed
   And The user enters "<input_value>" in the input field
@@ -26,9 +23,10 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
   | Phone      | 3694567893236          |
 
 # Aynı Kullanıcıyla Tekrar Kayıt
-
+  @Outline
   Scenario Outline: Duplicate registration with the same email or phone number
-
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
     And The user switches to "<input_type>" input field if needed
     And The user enters an already registered "<input_value>"
@@ -42,8 +40,10 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 
   #Eksik Zorunlu Alanlar
-
+  @Outline
   Scenario Outline: Missing required fields during registration
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
     And User leaves "<field>" empty by "<input_type>" , clicks the button with description Sign Up and should see a validation message "<message>".
     * Driver turns off
     Examples:
@@ -58,9 +58,10 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
 
   #Geçersiz E-posta Formatı
-
+  @Outline
   Scenario Outline: Registration with invalid email format
-
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
     And The user switches to "Email" input field if needed.
     And The user enters "<invalid_email>" in the input field
@@ -78,13 +79,22 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
 
   #Geçersiz Telefon Formatı
 
-@seren
-    # BUG
-  Scenario Outline: Registration with invalid phone number format
 
+    # BUG
+  @Outline @seren
+  Scenario Outline: Registration with invalid phone number format
+    * User makes driver adjustments
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
     * User clicks tap coordinates 142, 877
-    And User selects the country code "+49"
+    * User swipes to screen coordinates 251, 680, 251, 132
+    * User swipes to screen coordinates 251, 680, 251, 132
+    * User swipes to screen coordinates 251, 680, 251, 132
+    * User swipes to screen coordinates 251, 680, 251, 132
+    * User swipes to screen coordinates 251, 680, 251, 132
+    * User swipes to screen coordinates 251, 680, 251, 132
+    And User selects the country code +49
     And The user enters "<invalid_phone>" in the phone input field
     And The user enters a valid password "Team123."
     * User clicks the button Sign Up.
@@ -92,26 +102,30 @@ Scenario Outline: Successful Registration with Dynamic Email or Phone Field
     * Driver turns off
     Examples:
       | invalid_phone   |
-   #  | 1234            |
-      | abcdefghij      |
-      | 12345678901     |
-      | 01234567890     |
-      | 0000000000      |
+      | abchlakttlpo    |
+      | 09575851776    |
+      | 00000000        |
+
+
+
 
 
   #Kısa veya Zayıf Şifre Girişi
-
+  @Outline
   Scenario Outline: Registration with weak or invalid password
 
+    * User makes driver adjustments
+    * User clicks the button with description "Profile"
+    * User clicks the button with description "Sign Up"
     And User clicks on the name button enters a valid "John Doe".
     And The user switches to "Email" input field if needed.
     And The user enters "john.doe@example.com" in the input field
     And The user enters "<weak_password>" as the password
     * User clicks the button Sign Up.
-    Then The user should see an error message "Password must be at least 6 characters."
+    Then an error message "Password is short" should be displayed on singUp Page.
     * Driver turns off
     Examples:
       | weak_password |
       | 12345         |
       | abcd          |
-      | 123abc        |
+
