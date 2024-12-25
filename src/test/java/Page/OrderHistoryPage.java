@@ -44,7 +44,7 @@ public class OrderHistoryPage {
     public WebElement passwordBox; //pasword alanı
 
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Sign In\").instance(1)")
-    public WebElement logInSignInButton; //sign in sayfasındaki sign in butonu
+    public WebElement logInSignInButton; //sign in sayfasındaki sign in butonuu
 
     @AndroidFindBy(accessibility = "Profile")
     public static WebElement userProfileIcon; //kayıt olunduktan sonra sağ alttaki profile ikonu
