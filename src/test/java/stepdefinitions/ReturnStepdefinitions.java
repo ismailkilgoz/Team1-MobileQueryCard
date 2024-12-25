@@ -60,32 +60,90 @@ public class ReturnStepdefinitions {
     @Given("Switching from Query Cart application to Google Chrome")
     public void switching_from_query_cart_application_to_google_chrome() {
         ReusableMethods.wait(3);
-
         Driver.startActivity("com.android.chrome","com.google.android.apps.chrome.Main",false);
 
-        ReusableMethods.wait(2);
+        /*
+        Uygulama switch yapiyoruz ve Chrome'a geciyoruz.
+         */
     }
     @Given("Go to the Query Cart url and log in with admin information")
     public void go_to_the_query_cart_url_and_log_in_with_admin_information() {
         returnPage.googleSearchToQueryCart();
         ReusableMethods.wait(3);
         returnPage.signInFromUrl();
+        /*
+        Chrome uzerinden QueryCart url'ine gidiyoruz ve admin bilgileri ile giris yapiyoruz
+         */
     }
+
     @Given("Go to dashboard from profile icon")
-    public void go_to_dashboard_from_profile_icon() {
+    public void go_to_dashboard_from_profile_icon() throws InvalidMidiDataException {
         returnPage.goToDashboard();
-
+        /*
+        Admin dashboard sayfasina gidiyoruz
+         */
     }
-    @Given("Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.")
-    public void go_to_the_online_orders_page_and_after_the_user_s_order_is_verified_it_is_confirmed_and_delivered() {
-        returnPage.confirmOrder();
 
+    @Given("Go to the Online Orders page and after the user's order is verified, it is confirmed and delivered.")
+    public void go_to_the_online_orders_page_and_after_the_user_s_order_is_verified_it_is_confirmed_and_delivered() throws InvalidMidiDataException {
+        returnPage.confirmOrder();
+        /*
+        Dashboard sayfasindan Online Orders sayfasina gidiyoruz ve alisverisi onayliyor, teslim edildi secenegini tikliyoruz.
+         */
     }
     @Given("Returns to the Query Cart app as the user")
     public void returns_to_the_query_cart_app_as_the_user() {
         Driver.startActivity("com.wise.querycart", "com.wise.querycart.MainActivity",false);
-        System.out.println("Uygulamaya geri dönüldü.");
 
+        ReusableMethods.wait(5);
+        /*
+        Tekrar QueryCart app'e donuyoruz
+         */
     }
+
+    @Given("User goes to the order history page via the profile")
+    public void user_goes_to_the_order_history_page_via_the_profile() {
+        returnPage.goToOrderHistory();
+        ReusableMethods.wait(1);
+        /*
+        Uygulama icerisinden Order History sayfasina gidiyoruz
+         */
+    }
+
+    @Given("Clicks on the product details and finds the product delivered")
+    public void clicks_on_the_product_details_and_finds_the_product_delivered() {
+        returnPage.selectOrderAndVerifyDelivery();
+        ReusableMethods.wait(1);
+        /*
+        Yapmis oldugumuz alisverisin elimize ulastigi bilgisini dogruluyoruz.
+         */
+    }
+
+    @Given("The return button should be displayed")
+    public void the_return_button_should_be_displayed() throws InvalidMidiDataException {
+        returnPage.returnButtonIsEnabled();
+        ReusableMethods.wait(1);
+        /*
+        Return Request' butonunun aktif oldugunu dogruluyoruz.
+         */
+    }
+
+    @Given("Perform return transactions")
+    public void perform_return_transactions() {
+       returnPage.returnTransactions();
+        ReusableMethods.wait(1);
+        /*
+        Return islemlerini yapiyoruz.
+         */
+    }
+    @Given("The return process has been initiated on the Return Orders page")
+    public void the_return_process_has_been_initiated_on_the_return_orders_page() {
+        returnPage.confirmAcceptedReturnFromReturnOrdersPage();
+        ReusableMethods.wait(1);
+        /*
+        Return Orders sayfasindan iade isleminin baslatilgini dogruluyoruz.
+         */
+    }
+
 
 }
