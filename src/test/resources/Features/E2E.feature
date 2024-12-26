@@ -6,7 +6,6 @@ Feature: E2E Test
     * User clicks the button with description "Sign In"
     * User click the button Use Email Instead and sendKeys "mustafa.user@querycart.com"
     * User clicks the button "signInLoginButton"
-    # Kayitli bir kullanici olarak (adres bilgileri girilmis), giris yapilmali
 
   Scenario: User logs in and purchases an item, then initiates item returns
 
@@ -23,11 +22,5 @@ Feature: E2E Test
     * The return button should be displayed
     * Perform return transactions
     * The return process has been initiated on the Return Orders page
-    * Driver turns off
+    * Driver turns off.
 
-    #r logout
-    * User clicks profile button on the home page
-    * User verifies logout button is enable
-    * User verifies logout button clickable
-    * Toaster is displayed
-    * Driver turns off

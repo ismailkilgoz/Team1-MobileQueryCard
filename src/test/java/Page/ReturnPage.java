@@ -588,4 +588,8 @@ public class ReturnPage {
         String returnResponse = returnOrdersReturnResponse.getAttribute("content-desc");
         assertTrue(returnResponse.contains("Pending"));
     }
+
+    public void driverQuit(){
+        driver.quit();
+    }
 }

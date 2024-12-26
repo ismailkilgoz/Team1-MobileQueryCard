@@ -70,4 +70,114 @@ To run your tests simply you need to  execute the following command from in comm
 ```
 appium
 ```
+# QueryCart Mobile Projesi
 
+## Proje Hakkında (About the Project)
+QueryCart Mobile Projesi, Selenium ve Cucumber teknolojileri kullanılarak geliştirilmiş bir test otomasyon projesidir. Bu proje, QueryCart uygulamasini test etmek için tasarlanmıştır. Proje, Maven yapısını takip eder ve Java programlama dilinde geliştirilmiştir.
+
+## Kullanılan Teknolojiler (Technologies Used)
+- **Java** (17+)
+- **Maven**
+- **Selenium** (v4.13.0)
+- **Cucumber** (v7.4.1)
+- **Appium** (v8.6.0)
+- **Lombok** (v1.18.30)
+- **Apache POI** (v5.2.3)
+- **Log4j** (v2.20.0)
+- **JUnit 5** (v5.10.0)
+- **JavaFaker** (v1.0.2)
+
+## Proje Yapısı (Project Structure)
+```
+ApponteOtomasyon/
+├── src/test/java/
+│   ├── Apps/                 # Uygulama ile ilgili sınıflar
+│   ├── Pages/                # Sayfa nesnesi modeli (Page Object Model)
+│   ├── Runner/               # Cucumber Runner sınıfları
+│   ├── stepdefinitions/      # Test adımları (Step Definitions)
+│   ├── utilities/            # Yardımcı sınıflar (Utilities)
+│   │   ├── ConfigReader      # Konfigürasyon dosyalarını okuma
+│   │   ├── Driver            # Sürücü yönetimi
+│   │   ├── ExcelDataReader   # Excel verilerini okuma
+│   │   ├── OptionsMet        # Appium seçenekleri
+│   │   └── ReusableMethods   # Yeniden kullanılabilir yöntemler
+├── resources/                # Proje kaynak dosyaları
+│   ├── features/             # Feature dosyaları
+├── TestData/                 # Test veri dosyaları
+└── pom.xml                   # Maven yapılandırma dosyası
+```
+
+## Önemli Dosya ve Klasörler (Key Files and Directories)
+
+### `utilities/ConfigReader`
+- `config.properties` dosyasını okuyarak proje boyunca kullanılabilecek yapılandırma değerlerini sağlar.
+
+### `utilities/Driver`
+- WebDriver nesnesinin yönetimini sağlar ve singleton yapısını uygular.
+- Testlerde kullanılan tarayıcı örneklerini oluşturur.
+
+### `utilities/ExcelDataReader`
+- Excel dosyalarından test verilerini okumak için yöntemler içerir.
+
+### `utilities/OptionsMet`
+- Appium testleri için gerekli olan özel ayarları yapılandırır.
+- Örneğin, cihaz bilgileri ve uygulama ayarlarını içerir.
+
+### `utilities/ReusableMethods`
+- Test süreçlerinde sıkça kullanılan yöntemleri içerir (örneğin, ekran görüntüsü alma, bekleme işlemleri, dinamik öğe bulma).
+
+### `resources/features`
+- Cucumber senaryolarını içeren `.feature` dosyalarını barındırır.
+- Her bir dosya, testlerin mantıksal adımlarını ve girdi çıktısını tanımlar.
+
+## Appium Testleri (Appium Tests)
+Appium testleri için gerekli yöntemler `utilities/ReusableMethods` ve `utilities/OptionsMet` sınıflarında tanımlanmıştır. Bu yöntemler, mobil uygulama testlerini kolaylaştırmak için kullanılabilir.
+
+### Appium Kullanımı (Using Appium)
+1. **OptionsMet:** Appium sürücüsü için gerekli olan ayarları içerir. Bu ayarları özelleştirerek farklı cihazlar ve platformlar için test yapabilirsiniz.
+2. **ReusableMethods:** Mobil uygulama testi sırasında sık kullanılan işlemleri içerir. Örneğin:
+   - Uygulamayı başlatma ve kapatma
+   - Mobil öğelerle etkileşim kurma
+   - Ekran görüntüsü alma
+
+## Kurulum Adımları (Setup Instructions)
+
+### Gerekli Ön Koşullar (Prerequisites)
+1. **Java JDK 17** yüklü olmalıdır.
+2. **Maven** yüklü olmalıdır.
+3. **IntelliJ IDEA** gibi bir IDE önerilir.
+4. **Git** yüklü olmalıdır.
+
+### Kurulum (Installation)
+1. Bu projeyi klonlayın:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Proje klasörüne gidin:
+   ```bash
+   cd ApponteOtomasyon
+   ```
+
+3. Bağımlılıkları indirin:
+   ```bash
+   mvn clean install
+   ```
+
+## Kullanım Talimatları (Usage Instructions)
+
+### Testlerin Çalıştırılması (Running the Tests)
+1. **Runner** klasöründeki uygun `Runner` sınıfını çalıştırarak testleri başlatabilirsiniz.
+2. Test sonuçlarını `console` veya `target` klasöründe oluşturulan raporlar üzerinden inceleyebilirsiniz.
+
+### Özelleştirme (Customization)
+- Test verilerini `TestData` klasöründen düzenleyebilirsiniz.
+- Yeni sayfalar eklemek için `Pages` klasöründe yeni sınıflar oluşturabilirsiniz.
+- Yeni step definition'lar eklemek için `stepdefinitions` klasörünü kullanabilirsiniz.
+- `.feature` dosyalarını düzenleyerek yeni senaryolar ekleyebilirsiniz.
+
+## Katkıda Bulunma (Contributing)
+Bu projeye katkıda bulunmak isterseniz, lütfen önce bir konu açın ve değişiklik önerinizi tartışalım. Pull request'ler memnuniyetle kabul edilir.
+
+## Lisans (License)
+Bu proje açık kaynaklıdır ve [MIT Lisansı](LICENSE) ile lisanslanmıştır.

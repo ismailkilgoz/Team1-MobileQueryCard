@@ -145,5 +145,10 @@ public class ReturnStepdefinitions {
          */
     }
 
+    @Given("Driver turns off.")
+    public void driver_turns_off() {
+        returnPage.driverQuit();
+    }
+
 
 }
