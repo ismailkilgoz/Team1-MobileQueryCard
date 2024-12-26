@@ -10,12 +10,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
 
 import static utilities.Driver.getAppiumDriver;
+import static utilities.OptionsMet.clickButtonByDescription;
 
 public class ForgotPasswordStepdefinition {
 
@@ -45,25 +47,36 @@ public class ForgotPasswordStepdefinition {
         Assert.assertTrue(actualText.contains(expectedMessage));
 
     }
+    @Given("User clicks the button with description {string}.")
+    public void user_clicks_the_button_with_description_(String description) {
+        ReusableMethods.wait(6);
+        clickButtonByDescription(description);
+
+
+    }
+
 
     @Then("an error popUp phone text {string} should be displayed.")
     public void an_error_pop_up_phone_text_should_be_displayed(String phoneText) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement visibleElement = wait.until(ExpectedConditions.visibilityOf(forgotPasswordPage.getPhoneNotExist()));
-        String actualText= visibleElement.getAttribute("content-desc");
-        System.out.println("ActualText : " + actualText);
-       // Assert.assertTrue(actualText.contains(phoneText));
-        Assert.assertTrue(actualText.contains(phoneText));
+        String errMes= visibleElement.getAttribute("content-desc");
+        System.out.println("errMes = " + errMes);
+      //  Assert.assertTrue(visibleElement.isDisplayed());
+        Assert.assertTrue(errMes.contains(phoneText));
+
 
     }
 
     @Then("an error popUp mail text {string} should be displayed.")
     public void an_error_pop_up_mail_text_should_be_displayed(String mailtext) {
-        ReusableMethods.waitForElement(driver,forgotPasswordPage.getMailNotExist(),10);
-        String actualText= forgotPasswordPage.getMailNotExist().getAttribute("content-desc");
-        System.out.println("ActualText : " + actualText);
-        //Assert.assertTrue(actualText.contains(mailtext));
-        Assert.assertTrue(forgotPasswordPage.getMailNotExist().isDisplayed());
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement visibleElement = wait.until(ExpectedConditions.visibilityOf(forgotPasswordPage.getMailNotExist()));
+        String errMes= visibleElement.getAttribute("content-desc");
+        System.out.println("errMes = " + errMes);
+        //  Assert.assertTrue(visibleElement.isDisplayed());
+        Assert.assertTrue(errMes.contains(mailtext));
+
     }
 
 }

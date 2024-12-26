@@ -62,7 +62,7 @@ public class Driver {
          * NoReset=true olursa uygulama kaldigi noktadan devam eder
          */
 
-        return driver;
+        return (AndroidDriver)driver;
     }
     public static void startActivity(String appPackage, String appActivity, boolean noReset) {
         if (getAppiumDriver() instanceof AndroidDriver) {
