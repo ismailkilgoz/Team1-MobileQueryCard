@@ -1,19 +1,25 @@
 package Page;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 
 import static utilities.Driver.getAppiumDriver;
 
@@ -41,12 +47,16 @@ public class ForgotPasswordPage extends BasePage{
             "Your password reset Successfully.\")")
     private WebElement passResetMessage;
 
-    @AndroidFindBy(uiAutomator = "   new UiSelector().description(\"Error This phone does not exist.\")")
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Error\n" +
+            "This phone does not exist.\"]")
     private WebElement phoneNotExist;
 
 
-    @AndroidFindBy(uiAutomator = "   new UiSelector().description(\"Error This email does not exist.\")")
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Error\n" +
+            "This email does not exist.\"]")
     private WebElement mailNotExist;
+
+
 
 
 }

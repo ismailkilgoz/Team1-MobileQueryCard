@@ -38,7 +38,7 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
     * Driver turns off
 
 
-@seren
+@seren @Outline
   Scenario: [US_006] TC03 Password reset with an invalid email address
 
     And The user switches to "Email" input field if needed
@@ -46,10 +46,10 @@ Feature:[US_006] As a registered user, I want to be able to change my password w
     * User clicks the button with description "Get OTP"
     Then an error popUp mail text "This email does not exist." should be displayed.
 
-@seren @Outline
+@seren
   Scenario:[US_006] TC04 Password reset with an invalid phone number
 
     * User clicks phone number textbox and "12345" phone number
-    * User clicks the button with description "Get OTP"
-    Then an error popUp phone text "This phone does not exist." should be displayed.
+    * User clicks the button with description "Get OTP".
+   Then an error popUp phone text "This phone does not exist." should be displayed.
 

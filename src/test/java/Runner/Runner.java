@@ -11,7 +11,7 @@ import utilities.Driver;
                 "json:target/cucumber.json","html:target/cucumber-reports/cucumber.html"},
         features = "src/test/resources/features",
         glue = "stepdefinitions",
-        tags = "@" ,
+        tags = "@smoke" ,
         dryRun = false
 
 
