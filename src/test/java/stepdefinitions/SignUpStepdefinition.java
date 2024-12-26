@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
@@ -23,8 +24,8 @@ public class SignUpStepdefinition {
 
     SignUpPage signUpPage=new SignUpPage();
 
-    public static AndroidDriver driver= (AndroidDriver) getAppiumDriver();
-    static WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(20));
+    AndroidDriver driver= (AndroidDriver) Driver.getAppiumDriver();
+    WebDriverWait wait = new WebDriverWait(getAppiumDriver(), Duration.ofSeconds(30));
     @Given("User clicks on the name button enters a valid {string}.")
     public void user_clicks_on_the_button_enters_a_valid( String firstName) {
         ReusableMethods.wait(2);
@@ -33,9 +34,10 @@ public class SignUpStepdefinition {
     }
     @Given("The user switches to {string} input field if needed")
     public void the_user_switches_to_input_field_if_needed(String inputType) {
+
         ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
-       // signUpPage.SelectSingUpWithEmail(inputType);
-        signUpPage.getUseEmail().click();
+       // signUpPage.getUseEmail().click();
+        signUpPage.SelectSingUpWithEmail(inputType);
     }
     @Given("The user enters {string} in the input field")
     public void the_user_enters_in_the_input_field(String inputValue) {
@@ -87,25 +89,31 @@ public class SignUpStepdefinition {
 
     @Then("an error message {string} should be displayed on singUp Page.")
     public void an_error_message_should_be_displayed_on_sing_up_page(String errorText) {
-        System.out.println(errorText);
-        ReusableMethods.waitForElement(driver,signUpPage.getErrorEmailMessage(),15);
-        Assert.assertTrue(signUpPage.getErrorEmailMessage().isDisplayed());
+
+        WebElement errorMessage = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + errorText + "\")"));
+        ReusableMethods.waitForElement(driver,errorMessage,20);
+        String errMessage=errorMessage.getAttribute("content-desc");
+        System.out.println("ErrorMessage = " + errMessage);
+        Assert.assertTrue(errMessage.contains(errorText));
 
     }
 
-    @Given("The user switches to {string} input field if needed.")
-    public void the_user_switches_to_input_field_if_needed_(String string) {
+    @Given("The user switches to Email input field if needed.")
+    public void the_user_switches_to_input_field_if_needed_() {
         ReusableMethods.waitForElement(driver,signUpPage.getUseEmail(),15);
         signUpPage.getUseEmail().click();
-        System.out.println(string);
+
     }
 
 
 
-    @Given("User selects the country code {string}")
-    public void user_selects_the_country_code(String countryCode) {
-        ReusableMethods.scrollAndClick(countryCode);
-
+    @Given("User selects the country code +49")
+    public void user_selects_the_country_code() {
+        WebElement webElement = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"+49\")"));
+        ReusableMethods.waitForElement(driver,webElement,30);
+        webElement.click();
     }
     @Given("The user enters {string} in the phone input field")
     public void the_user_enters_in_the_phone_input_field(String phone) {
@@ -123,5 +131,14 @@ public class SignUpStepdefinition {
     signUpPage.getSignUpButtonforUnsuccesMessage().click();
     }
 
+    @Given("The user enters {string} as the password")
+    public void the_user_enters_as_the_password(String weakPass) {
+        signUpPage.getPasswordBox().click();
+        signUpPage.getPasswordBox().sendKeys(weakPass);
+        ReusableMethods.wait(2);
+    }
+    @Then("The user should see an error message {string}")
+    public void the_user_should_see_an_error_message(String string) {
 
+    }
 }

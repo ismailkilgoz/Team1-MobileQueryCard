@@ -8,6 +8,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -162,6 +163,7 @@ public class PaymentPage extends BasePage {
 
     public void fillCreditCardDetailsWithInvalidCard(){
 
+        Actions actions=new Actions(getAppiumDriver());
 
         cardNumberBox.click();
         cardNumberBox.sendKeys("4000002760000000");
